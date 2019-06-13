@@ -1,18 +1,24 @@
 class World
 {
-	public class World(var width,var deep,var heigth)
+	constructor(width,deep,heigth)
 	{
-		this.map[][][];
+		this.scene = new THREE.Scene();
+		this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
+		this.camera.position.z = 1;
+
 		this.width = width;
 		this.deep = deep;
-		this.heigth = heigth;		
+		this.heigth = heigth;
+		this.map = [];	
 		
-		this.rotation = 0.0f;
+		this.rotation = 0.0;
 		
 		for(var i=0; i<width; i++) 
 		{
+			map[i] = [];
 			for(var j=0; j<deep; j++) 
 			{
+				map[i][j] = [];
 				for(var k=0; k<heigth; k++) 
 				{
 					map[i][j][k] = undefined;
@@ -22,7 +28,7 @@ class World
 
 	}
 	
-	public Update()
+	Update()
 	{
 		for(var i=0; i<width; i++) 
 		{
@@ -30,7 +36,7 @@ class World
 			{
 				for(var k=0; k<heigth; k++) 
 				{
-					if(map[i][j][k] != undefined;
+					if(map[i][j][k] != undefined)
 					{
 						//map[i][j][k].Update();
 					}					
@@ -39,7 +45,7 @@ class World
 		}
 	}
 	
-	public Draw()
+	Draw()
 	{
 		for(var i=0; i<width; i++) 
 		{
@@ -47,7 +53,7 @@ class World
 			{
 				for(var k=0; k<heigth; k++) 
 				{
-					if(map[i][j][k] != undefined;
+					if(map[i][j][k] != undefined)
 					{
 						//map[i][j][k].Draw();
 					}					
@@ -56,7 +62,7 @@ class World
 		}
 	}
 	
-	public CheckLineX(var y,var z)
+	CheckLineX(y,z)
 	{
 		for(var i=0; i<width; i++) 
 		{
@@ -67,7 +73,7 @@ class World
 		}
 	}
 	
-	public CheckLineY(var x,var z)
+	CheckLineY(x,z)
 	{
 		for(var j=0; j<deep; j++) 
 		{
@@ -78,7 +84,7 @@ class World
 		}
 	}
 	
-	public CheckLayer(var z)
+	CheckLayer(z)
 	{
 		for(var i=0; i<width; i++) 
 		{
@@ -90,11 +96,10 @@ class World
 				}
 			}
 		}
-		
 		return true;
 	}
 
-	public RemoLayer(var z)
+	RemoveLayer(z)
 	{
 		for(var i=0; i<width; i++) 
 		{
