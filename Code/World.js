@@ -1,11 +1,9 @@
+var gridSize = 0.2;
+
 class World
 {
 	constructor(width,deep,heigth)
 	{
-		this.scene = new THREE.Scene();
-		this.camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 0.01, 10 );
-		this.camera.position.z = 1;
-
 		this.width = width;
 		this.deep = deep;
 		this.heigth = heigth;
@@ -45,7 +43,7 @@ class World
 		}
 	}
 	
-	Draw()
+	Draw(scene)
 	{
 		for(var i=0; i<width; i++) 
 		{
@@ -55,7 +53,7 @@ class World
 				{
 					if(map[i][j][k] != undefined)
 					{
-						//map[i][j][k].Draw();
+						map[i][j][k].Draw();
 					}					
 				}
 			}

@@ -1,6 +1,12 @@
 class Cube
 {
-    constructor()
+    constructor(x,y,z,scene)
+    {
+        
+        scene.add();
+    }
+
+    Update()
     {
         
     }
