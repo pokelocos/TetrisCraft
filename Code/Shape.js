@@ -2,9 +2,7 @@ class Shape
 {
     constructor(x,y,z,cubePos)
     {
-        this.x = x;
-        this.y = y;
-        this.z = z;
+        this.position = new THREE.Vector3(x,y,z);
         this.cubePos = cubePos;
         this.cubes = [];
     }
