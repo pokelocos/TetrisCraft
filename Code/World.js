@@ -11,15 +11,15 @@ class World
 		
 		this.rotation = 0.0;
 		
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			map[i] = [];
-			for(var j=0; j<deep; j++) 
+			this.map[i] = [];
+			for(var j=0; j<this.deep; j++) 
 			{
-				map[i][j] = [];
-				for(var k=0; k<heigth; k++) 
+				this.map[i][j] = [];
+				for(var k=0; k<this.heigth; k++) 
 				{
-					map[i][j][k] = undefined;
+					this.map[i][j][k] = undefined;
 				}
 			}
 		}
@@ -28,13 +28,13 @@ class World
 	
 	Update()
 	{
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			for(var j=0; j<deep; j++) 
+			for(var j=0; j<this.deep; j++) 
 			{
-				for(var k=0; k<heigth; k++) 
+				for(var k=0; k<this.heigth; k++) 
 				{
-					if(map[i][j][k] != undefined)
+					if(this.map[i][j][k] != undefined)
 					{
 						//map[i][j][k].Update();
 					}					
@@ -45,15 +45,15 @@ class World
 	
 	Draw()
 	{
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			for(var j=0; j<deep; j++) 
+			for(var j=0; j<this.deep; j++) 
 			{
-				for(var k=0; k<heigth; k++) 
+				for(var k=0; k<this.heigth; k++) 
 				{
-					if(map[i][j][k] != undefined)
+					if(this.map[i][j][k] != undefined)
 					{
-						map[i][j][k].Draw();
+						this.map[i][j][k].Draw();
 					}					
 				}
 			}
@@ -62,9 +62,9 @@ class World
 	
 	CheckLineX(y,z)
 	{
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			if(map[i][y][z] != undefined)
+			if(this.map[i][y][z] != undefined)
 			{
 				return false;
 			}
@@ -73,9 +73,9 @@ class World
 	
 	CheckLineY(x,z)
 	{
-		for(var j=0; j<deep; j++) 
+		for(var j=0; j<this.deep; j++) 
 		{
-			if(map[x][j][z] != undefined)
+			if(this.map[x][j][z] != undefined)
 			{
 				return false;
 			}
@@ -84,11 +84,11 @@ class World
 	
 	CheckLayer(z)
 	{
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			for(var j=0; j<deep; j++) 
+			for(var j=0; j<this.deep; j++) 
 			{
-				if(map[i][j][z] != undefined)
+				if(this.map[i][j][z] != undefined)
 				{
 					return false;
 				}
@@ -99,25 +99,25 @@ class World
 
 	RemoveLayer(z)
 	{
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			for(var j=0; j<deep; j++) 
+			for(var j=0; j<this.deep; j++) 
 			{
-				map[i][j][z] = undefined;
+				this.map[i][j][z] = undefined;
 			}
 		}
-		if(z == height || z < -1){return; }
+		if(z == this.height || z < -1){return; }
 		
-		for(var i=0; i<width; i++) 
+		for(var i=0; i<this.width; i++) 
 		{
-			for(var j=0; j<deep; j++) 
+			for(var j=0; j<this.deep; j++) 
 			{
-				for(var k=z+1; k<height; k++) 
+				for(var k=z+1; k<this.height; k++) 
 				{
-					if(map[i][j][k] != undefined)
+					if(this.map[i][j][k] != undefined)
 					{
-						map[i][j][k-1] = map[i][j][k];
-						map[i][j][k] = undefined;
+						this.map[i][j][k-1] = this.map[i][j][k];
+						this.map[i][j][k] = undefined;
 					}
 				}
 			}
