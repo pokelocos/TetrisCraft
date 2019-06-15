@@ -28,11 +28,11 @@ class Game
     {
         this.renderer.render(this.scene,this.camera);
 
-		//var size = 10;
-		//var divisions = 10;
+		var size = 10;
+		var divisions = 10;
 
-		//var gridHelper = new THREE.GridHelper( size, divisions );
-		//scene.add( gridHelper );
+		var gridHelper = new THREE.GridHelper( size, divisions );
+		this.scene.add( gridHelper );
     }
 
     SpawnShape()
