@@ -21,7 +21,7 @@ class Game
     Update()
     {
         this.world.Update();
-        this.shape.Update();
+       // this.shape.Update();
     }
 
     Draw()
