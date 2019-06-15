@@ -27,12 +27,16 @@ class Game
 
     Draw()
     {
-
-        this.world.Draw();
-        this.shape.Draw();
-        this.nextShape.Draw();
         this.renderer.render(this.scene,this.camera);
     }
 
-
+    SpawnShape()
+    {
+        this.shape = new Shape(
+            this.world.width/(2*gridSize),
+            this.world.height/gridSize,
+            this.world.deep/(2*gridSize),
+            shapes[Math.floor(Math.random()*shapes.length)],
+            this.scene);
+    }
 }

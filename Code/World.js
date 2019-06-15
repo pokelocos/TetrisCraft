@@ -43,7 +43,7 @@ class World
 		}
 	}
 	
-	Draw(scene)
+	Draw()
 	{
 		for(var i=0; i<width; i++) 
 		{
