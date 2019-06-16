@@ -42,5 +42,5 @@ class Game
             this.world.deep/(2*gridSize),
             shapes[Math.floor(Math.random()*shapes.length)],
             this.scene);
-    }z
+    }
 }
