@@ -1,4 +1,4 @@
-var shapes = []
+var shapes = [];
 // *
 shapes[0] = [
     new THREE.Vector3(0,0,0)

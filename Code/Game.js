@@ -13,13 +13,8 @@ class Game
 
 		this.camera.position.set(-7,7,7);
 		this.camera.lookAt(0,0,0);
-        //this.camera.setUp();
 
         this.scene.add(this.camera);
-
-       // this.renderer = new THREE.WebGLRenderer({antialias: true});
-       // this.renderer.setSize(window.innerWidth, window.innerHeight);
-        //document.body.appendChild(this.renderer.domElement);
 
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		this.scene.add( gridHelper );
@@ -47,5 +42,5 @@ class Game
             this.world.deep/(2*gridSize),
             shapes[Math.floor(Math.random()*shapes.length)],
             this.scene);
-    }
+    }z
 }
