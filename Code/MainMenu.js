@@ -11,12 +11,11 @@ class MainMenu
 		//this.raycaster = new THREE.Raycaster();
 		//this.mouse = new THREE.Vector2();
 		
-		this.loader = new THREE.TextureLoader();		
+		//		'../Assets/TetrisCraft_title.png'
 		
-		this.texture5 = this.loader.load('../Assets/TetrisCraft_title.png');		
-		this.texture5.magFilter = THREE.NearestFilter;
-		this.texture5.minFilter = THREE.NearestFilter;
-		this.material5 = new THREE.MeshBasicMaterial({map: this.texture5});
+				
+			
+		
 		/*
         this.geometry = new THREE.PlaneGeometry( 3, 1.5);
 		this.material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
@@ -44,11 +43,22 @@ class MainMenu
 		this.sceneHUD.add(this.selector);
 		*/
 		
-		this.geometry5 = new THREE.PlaneGeometry(787,89);
-        this.tittle = new THREE.Mesh(this.geometry5,this.material5);
-		this.tittle.material.side = THREE.DoubleSide;
-		this.tittle.position.x = 0;
-		this.sceneHUD.add(this.tittle);			
+		this.title = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.sceneHUD.add(this.title.mesh);	
+		
+		this.playButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.sceneHUD.add(this.playButton.mesh);	
+		
+		this.optionButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.sceneHUD.add(this.optionButton.mesh);
+		
+		this.InstructButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.sceneHUD.add(this.InstructButton.mesh);	
+		
+		this.exitButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.sceneHUD.add(this.exitButton.mesh);	
+		
+			
 	}
 	
 	Update()
