@@ -19,7 +19,7 @@ class Game
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		this.scene.add( gridHelper );
 
-		this.cube = new Cube(1,0,1);
+		this.cube = new Cube(1,0,1, 1);
 		this.scene.add(this.cube.mesh);
     }
 

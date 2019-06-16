@@ -5,7 +5,7 @@ class Cube
         this.position = new THREE.Vector3(x,y,z);
         var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
        // this.cube = new THREE.Mesh(geometry,materials[type]);
-        this.mesh = new THREE.Mesh(geometry,materials[1]);
+        this.mesh = new THREE.Mesh(geometry,materials[id]);
         //this.cube.setPostion(x*gridSize,y*gridSize,z*gridSize);
 		this.Update(this.mesh);
     }
