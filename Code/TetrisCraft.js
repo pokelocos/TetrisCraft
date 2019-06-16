@@ -12,12 +12,17 @@ function init()
 {
 	game = new Game();
 	main = new MainMenu();
+<<<<<<< HEAD
 	instructions = new Instructions();
 	options = new Options();	
 	
 	this.renderer = new THREE.WebGLRenderer();
         //renderer.setSize(window.innerWidth, window.innerHeight);
 	document.body.appendChild(this.renderer.domElement);
+=======
+	//instructions = new Instructions();
+	//options = new Options();	
+>>>>>>> 249f7f8b7d38b3e99d21495031c62fb98f0e4b70
 }
 
 function loop() 
