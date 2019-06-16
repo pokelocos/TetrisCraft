@@ -1,16 +1,18 @@
 class Cube
 {
-    constructor(x,y,z,type)
+    constructor(x,y,z)
     {
         this.position = new THREE.Vector3(x,y,z);
         var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
-        this.cube = new THREE.Mesh(geometry,materials[type]);
-        this.cube.setPostion(x*gridSize,y*gridSize,z*gridSize);
+		var material = new THREE.MeshBasicMaterial({color: 0xff0000});
+       // this.cube = new THREE.Mesh(geometry,materials[type]);
+        var mesh = new THREE.Mesh(geometry,material);
+        //this.cube.setPostion(x*gridSize,y*gridSize,z*gridSize);
     }
 
     Update(shape)
     {
-        this.cube.setPostion(
+        this.mesh.setPostion(
             this.position.x*gridSize + shape.position.x*gridSize,
             this.position.y*gridSize + shape.position.y*gridSize,
             this.position.z*gridSize + shape.position.z*gridSize,

@@ -11,9 +11,9 @@ loop();
 function init() 
 {
 	game = new Game();
-	main = new MainMenu();
-	instructions = new Instructions();
-	options = new Options();	
+	//main = new MainMenu();
+	//instructions = new Instructions();
+	//options = new Options();	
 }
 
 function loop() 
