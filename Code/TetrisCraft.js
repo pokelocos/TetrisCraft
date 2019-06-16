@@ -1,6 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
-var state = 0;
+var state = 1;
 
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
@@ -49,4 +49,6 @@ function loop()
 			break;
 	}
 }
+
+requestAnimationFrame(loop);
 
