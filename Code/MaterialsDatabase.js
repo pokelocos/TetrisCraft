@@ -1,7 +1,7 @@
 var materials = [];
 
 var loader = new THREE.TextureLoader();
-var stone = loader.load('Assets/stone.png');
+var stone = loader.load('../Assets/stone.png');
 
 //Stone
 materials[1] = [
