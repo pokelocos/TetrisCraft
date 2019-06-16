@@ -44,7 +44,7 @@ class MainMenu
 		this.sceneHUD.add(this.selector);
 		*/
 		
-		this.geometry5 = new THREE.PlaneGeometry( 787,89);
+		this.geometry5 = new THREE.PlaneGeometry(787,89);
         this.tittle = new THREE.Mesh(this.geometry5,this.material5);
 		this.tittle.material.side = THREE.DoubleSide;
 		this.tittle.position.x = 0;
