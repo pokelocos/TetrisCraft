@@ -1,6 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
-var state = 1;
+var state = 0;
 
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
@@ -14,6 +14,10 @@ function init()
 	main = new MainMenu();
 	instructions = new Instructions();
 	options = new Options();	
+	
+	this.renderer = new THREE.WebGLRenderer();
+        //renderer.setSize(window.innerWidth, window.innerHeight);
+	document.body.appendChild(this.renderer.domElement);
 }
 
 function loop() 
@@ -23,19 +27,19 @@ function loop()
 	{
 		case 0:
 			main.Update();
-			main.Draw();
+			main.Draw(this.render);
 			break;
 		case 1:
 			game.Update();
-			game.Draw();
+			game.Draw(this.render);
 			break;
 		case 2:
 			instructions.Update();
-			instructions.Draw();
+			instructions.Draw(this.render);
 			break;
 		case 2:
 			options.Update();
-			Option.Draw();
+			Option.Draw(this.render);
 			break;
 		default:
 			Conosole.Log("[Scene 'id' error, id: "+state+" not found]");

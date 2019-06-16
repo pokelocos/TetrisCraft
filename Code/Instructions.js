@@ -9,10 +9,6 @@ class Instructions
         //this.camera.setUp();
 		
 		this.scene.add(this.camera);
-
-        this.renderer = new THREE.WebGLRenderer();
-        //renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(this.renderer.domElement);
 	}
 	
 	Update()
@@ -20,9 +16,9 @@ class Instructions
 
     }
 
-    Draw()
+    Draw(buffer)
     {
-        this.renderer.render(this.scene,this.camera);
+        buffer.render(this.scene,this.camera);
     }
 
 }
