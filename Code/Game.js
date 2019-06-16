@@ -17,22 +17,42 @@ class Game
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		this.scene.add( gridHelper );
 
-		this.cube = new Cube(1,0,1, 1);
-		this.cube2 = new Cube(1,2,1, 1);
+		for(var y = 0; y < 7 ; y++){
+			for(var x = -3; x < 4; x++){
+				for(var z = -3; z < 4; z++){
+					if(Math.random() > 0.7){
+						var cube = new Cube(x,y,z, Math.floor(Math.random() * 11) + 1);
+						this.scene.add(cube.mesh);
+					}
+				}
+			}
+		}
 
-		this.scene.add(this.cube.mesh);
-		this.scene.add(this.cube2.mesh);
+		var light = new THREE.PointLight( 0xddffdd, 0.4 );
+		light.position.z = 70;
+		light.position.y = - 70;
+		light.position.x = - 70;
+		this.scene.add( light );
+		var light2 = new THREE.PointLight( 0xffdddd, 0.4 );
+		light2.position.z = 70;
+		light2.position.x = - 70;
+		light2.position.y = 70;
+		this.scene.add( light2 );
+		var light3 = new THREE.PointLight( 0xddddff, 0.4 );
+		light3.position.z = 70;
+		light3.position.x = 70;
+		light3.position.y = - 70;
+		this.scene.add( light3 );
 
-		this.light = new THREE.AmbientLight( 0xffffff, 1);
-		this.light.position.set( 0, 10, 0 );
-		this.light.castShadow = true; 
-		this.scene.add(this.light);
+		this.ambient = new THREE.AmbientLight( 0xffffff, 0.1);
+		//this.light.castShadow = true; 
+		this.scene.add(this.ambient);
 
 		//SAO
 		this.composer = new THREE.EffectComposer(renderer);
 		this.renderPass = new THREE.RenderPass( this.scene, this.camera );
 		this.composer.addPass(this.renderPass);
-		this.saoPass = new THREE.SAOPass( scene, camera, false, true );
+		this.saoPass = new THREE.SAOPass( this.scene, this.camera, false, true );
 		this.composer.addPass(this.saoPass);
     }
 
