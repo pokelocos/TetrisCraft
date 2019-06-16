@@ -6,8 +6,9 @@ class Cube
         var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
 		var material = new THREE.MeshBasicMaterial({color: 0xff0000});
        // this.cube = new THREE.Mesh(geometry,materials[type]);
-        var mesh = new THREE.Mesh(geometry,material);
+        this.mesh = new THREE.Mesh(geometry,material);
         //this.cube.setPostion(x*gridSize,y*gridSize,z*gridSize);
+		this.Update(this.mesh);
     }
 
     Update(shape)
@@ -19,9 +20,13 @@ class Cube
         );
     }
 
-    Update()
+    Update(mesh)
     {
-
+		this.mesh.position.set(
+				this.position.x*gridSize,
+				this.position.y*gridSize + gridSize/2,
+				this.position.z*gridSize,
+			);
     }
 
     Translate(x,y,z)

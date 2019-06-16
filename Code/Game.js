@@ -7,24 +7,24 @@ class Game
         this.world = new World(7,7,12);
         
 		this.scene = new THREE.Scene();
-		//this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
-		var size = 78;
-		this.camera = new THREE.OrthographicCamera(window.innerWidth/size, -window.innerWidth/size, window.innerHeight/size, -window.innerHeight/size, 1, 100);
+		this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
+		//var size = 78;
+		//this.camera = new THREE.OrthographicCamera(window.innerWidth/size, -window.innerWidth/size, window.innerHeight/size, -window.innerHeight/size, 1, 100);
 
-		this.camera.position.set(-17,17,17);
+		this.camera.position.set(-7,7,7);
 		this.camera.lookAt(0,0,0);
         //this.camera.setUp();
 
         this.scene.add(this.camera);
 
-        this.renderer = new THREE.WebGLRenderer({antialias: true});
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(this.renderer.domElement);
+       // this.renderer = new THREE.WebGLRenderer({antialias: true});
+       // this.renderer.setSize(window.innerWidth, window.innerHeight);
+        //document.body.appendChild(this.renderer.domElement);
 
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		this.scene.add( gridHelper );
 
-		this.cube = new Cube(5,5,5);
+		this.cube = new Cube(1,0,1);
 		this.scene.add(this.cube.mesh);
     }
 
@@ -34,9 +34,9 @@ class Game
        // this.shape.Update();
     }
 
-    Draw()
+    Draw(buffer)
     {
-        this.renderer.render(this.scene,this.camera);
+        buffer.render(this.scene,this.camera);
     }
 
     SpawnShape()

@@ -1,4 +1,4 @@
-var gridSize = 0.2;
+var gridSize = 1;
 
 class World
 {
