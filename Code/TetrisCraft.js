@@ -1,6 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
-var state = 1;
+var state = 0;
 
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
