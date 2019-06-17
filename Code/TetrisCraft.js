@@ -40,7 +40,7 @@ function loop()
 			instructions.Update();
 			instructions.Draw(this.renderer);
 			break;
-		case 2:
+		case 3:
 			options.Update();
 			Option.Draw(this.renderer);
 			break;
