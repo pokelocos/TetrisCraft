@@ -22,9 +22,18 @@ class Instructions
 		this.background.material.side = THREE.DoubleSide;
 		this.sceneHUD.add(this.background);
 		
+		this.dificultButton = new Item2D('../Assets/normalButton.png',400,60);
+		this.dificultButton.setPosition(0,-70,0);
+		this.sceneHUD.add(this.dificultButton.mesh);
 		
+		this.exitButton = new Item2D('../Assets/BackButton.png',400,60);
+		this.exitButton.setPosition(0,-140,0);
+		this.sceneHUD.add(this.exitButton.mesh);
 		
-		this.sceneHUD.add(this.camera);
+		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
+		this.selector.setPosition(0,-70,0);
+		this.sceneHUD.add(this.selector.mesh);
+		
 	}
 	
 	Update()

@@ -1,5 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
+var controller;
 var state = 0;
 
 //Scenes
@@ -13,8 +14,9 @@ function init()
 	main = new MainMenu();
 	instructions = new Instructions();
 	options = new Options();	
-
-	this.renderer = new THREE.WebGLRenderer({antialias:true});
+	this.controller = new Controller();
+	this.renderer = new THREE.WebGLRenderer({antialias:true, alpha: true});
+	this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
@@ -25,7 +27,9 @@ function init()
 
 function loop() 
 {
-	requestAnimationFrame(loop);
+	requestAnimationFrame(loop);	
+	controller.Update();
+	//this.renderer.clear();
 	switch(state)
 	{
 		case 0:
@@ -50,5 +54,7 @@ function loop()
 	}
 }
 
+
 requestAnimationFrame(loop);
+
 

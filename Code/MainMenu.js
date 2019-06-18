@@ -12,21 +12,6 @@ class MainMenu
 		this.cameraHUD.position.set(0,0,10);
 		this.cameraHUD.lookAt(0,0,0);
 		
-		/*
-		this.loader = new THREE.TextureLoader();
-		this.texture = this.loader.load('../Assets/BackGround.png');
-		this.texture.magFilter = THREE.NearestFilter;
-		this.texture.minFilter = THREE.NearestFilter;
-		this.texture.wrapS = THREE.RepeatWrapping;
-		this.texture.wrapT = THREE.RepeatWrapping;
-		this.texture.repeat.set(6,6);
-		this.material = new THREE.MeshBasicMaterial({map: this.texture,transparent: true});
-		this.geometry = new THREE.PlaneGeometry(2048,2048);	
-		this.background = new THREE.Mesh(this.geometry,this.material);
-		this.background.material.side = THREE.DoubleSide;
-		this.sceneHUD.add(this.background);
-		*/
-		
 		this.loader = new THREE.TextureLoader();
 		this.texture = this.loader.load('../Assets/BackGround_2.png');
 		this.texture.magFilter = THREE.NearestFilter;
@@ -61,9 +46,7 @@ class MainMenu
 		
 		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
 		this.selector.setPosition(0,posY,0);
-		this.sceneHUD.add(this.selector.mesh);
-		
-		
+		this.sceneHUD.add(this.selector.mesh);	
 			
 	}
 	
@@ -77,50 +60,41 @@ class MainMenu
 			this.dir = -this.dir;
 		}
 		
-		this.selector.setPosition(0,posY,0);
+		this.selector.setPosition(0,posY,0);	
+		console.log(keyDown.includes(38) +"&&"+selected);
 		
+		if (keyDown.includes(38) && selected > 0)
+		{
+			selected--;
+			posY += 70;
+		}
+		else if (keyDown.includes(40) && selected < 3)
+		{
+			selected++;
+			posY -= 70;
+		}
+		
+		if (keyDown.includes(32) || keyDown.includes(13))
+		{
+			if(selected != 3)
+			{
+				state = links[selected];
+			}
+			else
+			{
+				window.close();
+			}
+		}
     }
 
     Draw(buffer)
     {
-        //buffer.render(this.scene,this.camera);
-		buffer.render(this.sceneHUD,this.cameraHUD);
+		buffer.render(this.sceneHUD,this.cameraHUD);		
+		//buffer.render(this.scene,this.camera);
     }
 
 }
 
-document.addEventListener('keydown', function(event) 
-{
-  if (event.keyCode == 38)
-  {
-    if(selected > 0)
-	{
-		selected--;
-		posY += 70;
-	}
-  }
-  
-  if (event.keyCode == 40)
-  {
-    if(selected < 3)
-	{
-		selected++;
-		posY -= 70;
-	}
-  }
-  
-  if(event.keyCode == 32 || event.keyCode == 13)
-  {
-	  if(selected != 3)
-	  {
-		state = links[selected];
-	  }
-	  else
-	  {
-		  window.close();
-	  }
-  }
-});
 
 
 
