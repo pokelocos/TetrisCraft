@@ -6,7 +6,8 @@ class Game
         this.shape;
 		this.nextShapes = [];
 		this.hintLimit = 3;
-        this.world = new World(7,7,12);	
+		this.world = new World(7,7,12);
+		this.stage = 1;
         
 		this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
 		//var size = 78;
@@ -55,23 +56,30 @@ class Game
 	
 	Start()
 	{
-		this.GenerateNewHints(0,0,0,1);
+		this.GenerateNewHints(-10,-10,-10,1);
 		this.SpawnShape();
 	}
 
     Update()
     {
 		this.world.Update();
-		this.shape.Update();
-		if(this.shape.position.y > 0)
+		var y = this.CheckShapeCollision()
+		if(y != -1)
 		{
-			this.shape.Translate(0,-gridSize,0);
+			if(y < this.world.heigth)
+			{
+				this.ShapeToWorld();
+				this.SpawnShape();
+			}
+			else
+			{
+				//perdiste
+			}
 		}
 		else
 		{
-			this.SpawnShape();
+			this.shape.Update();
 		}
-		console.log(false);
     }
 
     Draw(buffer)
@@ -88,6 +96,36 @@ class Game
 		this.ReorderHints();
 		this.GenerateNewHints(0,0,0,1);
 	}
+
+	CheckShapeCollision()
+	{
+		for(var i = 0; i < this.shape.cubes.length; i++)
+		{
+			var x = this.shape.cubes[i].position.x + this.shape.position.x;
+			var y = this.shape.cubes[i].position.y + this.shape.position.y;
+			var z = this.shape.cubes[i].position.z + this.shape.position.z;
+			if(y == 0)
+			{ 
+				return y;
+			}
+			else if(this.world.map[x][z][y-1] != undefined)
+			{ 
+				return y-1;
+			}
+		}
+		return -1;
+	}
+
+	ShapeToWorld()
+	{
+		for(var i = 0; i < this.shape.cubes.length; i++)
+		{
+			var x = this.shape.cubes[i].position.x + this.shape.position.x;
+			var y = this.shape.cubes[i].position.y + this.shape.position.y;
+			var z = this.shape.cubes[i].position.z + this.shape.position.z;
+			this.world.map[x][z][y] = this.shape.cubes[i];
+		}
+	}
 	
 	GenerateNewHints(x,y,z,delta)
 	{
@@ -97,7 +135,8 @@ class Game
 			{
 				this.nextShapes[i] = new Shape(x + i*delta,y,z,
 									shapes[Math.floor(Math.random()*shapes.length)],
-									this.scene);
+									this.scene,
+									stage);
 			}
 		}
 	}

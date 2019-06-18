@@ -1,6 +1,6 @@
 class Shape
 {
-    constructor(x,y,z,cubePos,scene)
+    constructor(x,y,z,cubePos,scene,speed)
     {
         this.position = new THREE.Vector3(x,y,z);
         this.cubePos = cubePos;
@@ -17,15 +17,24 @@ class Shape
         {
             scene.add(this.cubes[i].mesh);
         }
+        //speed on ticks
+        this.speed = speed;
+        this.time = 0;
     }
 
     Update()
     {
         //console.log("hi");
+        if(this.time >= (1/this.speed)*10)
+        {
+            this.Translate(0,-gridSize,0);
+            this.time = 0;
+        }
         for(var i = 0; i < this.cubes.length; i++)
         {
             this.cubes[i].OnShapeUpdate(this);
         }
+        this.time++;
     }
 
     Translate(x,y,z)
