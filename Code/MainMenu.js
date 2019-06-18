@@ -1,3 +1,7 @@
+var selected = 0;
+var posY = 70;
+var links = [1,3,2];
+
 class MainMenu
 {
     constructor()
@@ -8,83 +12,90 @@ class MainMenu
 		this.cameraHUD.position.set(0,0,10);
 		this.cameraHUD.lookAt(0,0,0);
 		
-		//this.raycaster = new THREE.Raycaster();
-		//this.mouse = new THREE.Vector2();
-		
-		//		'../Assets/TetrisCraft_title.png'
-		
-				
-			
-		
-		/*
-        this.geometry = new THREE.PlaneGeometry( 3, 1.5);
-		this.material = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        this.background = new THREE.Mesh(this.geometry,this.material);
+		this.loader = new THREE.TextureLoader();
+		this.texture = this.loader.load('../Assets/BackGround_2.png');
+		this.texture.magFilter = THREE.NearestFilter;
+		this.texture.minFilter = THREE.NearestFilter;
+		this.material = new THREE.MeshBasicMaterial({map: this.texture,transparent: true});
+		this.geometry = new THREE.PlaneGeometry(4000,2048);	
+		this.background = new THREE.Mesh(this.geometry,this.material);
+		this.mov = -1000;
+		this.dir = 1;
+		this.background.position.set(this.mov,0,0);
+		this.background.material.side = THREE.DoubleSide;
 		this.sceneHUD.add(this.background);
 		
-		this.geometry1 = new THREE.PlaneGeometry( 3, 1.5);
-		this.material1 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        this.button1 = new THREE.Mesh(this.geometry1,this.material1);
-		this.sceneHUD.add(this.button1);
-		
-		this.geometry2 = new THREE.PlaneGeometry( 3, 1.5);
-		this.material2 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        this.button2 = new THREE.Mesh(this.geometry2,this.material2);
-		this.sceneHUD.add(this.button2);
-		
-		this.geometry3 = new THREE.PlaneGeometry( 3, 1.5);
-		this.material3 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        this.button3 = new THREE.Mesh(this.geometry3,this.material3);
-		this.sceneHUD.add(this.button3);
-		
-		this.geometry4 = new THREE.PlaneGeometry( 3, 1.5);
-		this.material4 = new THREE.MeshBasicMaterial( {color: 0xffff00, side: THREE.DoubleSide} );
-        this.selector = new THREE.Mesh(this.geometry4,this.material4);
-		this.sceneHUD.add(this.selector);
-		*/
-		
 		this.title = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.title.setPosition(0,(window.innerHeight/2) -150,0);
 		this.sceneHUD.add(this.title.mesh);	
 		
-		this.playButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
-		this.sceneHUD.add(this.playButton.mesh);	
+		this.playButton = new Item2D('../Assets/playButton.png',400,60);
+		this.playButton.setPosition(0,70,0);
+		this.sceneHUD.add(this.playButton.mesh);
 		
-		this.optionButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.optionButton = new Item2D('../Assets/optionsButton.png',400,60);
 		this.sceneHUD.add(this.optionButton.mesh);
 		
-		this.InstructButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.InstructButton = new Item2D('../Assets/instructionsButton.png',400,60);
+		this.InstructButton.setPosition(0,-70,0);
 		this.sceneHUD.add(this.InstructButton.mesh);	
 		
-		this.exitButton = new Item2D('../Assets/TetrisCraft_title.png',787,89);
-		this.sceneHUD.add(this.exitButton.mesh);	
+		this.exitButton = new Item2D('../Assets/ExitButton.png',400,60);
+		this.exitButton.setPosition(0,-140,0);
+		this.sceneHUD.add(this.exitButton.mesh);
 		
+		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
+		this.selector.setPosition(0,posY,0);
+		this.sceneHUD.add(this.selector.mesh);	
 			
 	}
 	
 	Update()
     {
+		this.mov = this.background.position.x+this.dir*0.2;
+		this.background.position.set(this.mov ,0,0);
 		
+		if((this.mov >= 1000 && this.dir>0) || (this.mov <= -1000 && this.dir<0) )
+		{
+			this.dir = -this.dir;
+		}
+		
+		this.selector.setPosition(0,posY,0);	
+		console.log(keyDown.includes(38) +"&&"+selected);
+		
+		if (keyDown.includes(38) && selected > 0)
+		{
+			selected--;
+			posY += 70;
+		}
+		else if (keyDown.includes(40) && selected < 3)
+		{
+			selected++;
+			posY -= 70;
+		}
+		
+		if (keyDown.includes(32) || keyDown.includes(13))
+		{
+			if(selected != 3)
+			{
+				state = links[selected];
+			}
+			else
+			{
+				window.close();
+			}
+		}
     }
 
     Draw(buffer)
     {
-        //buffer.render(this.scene,this.camera);
-		buffer.render(this.sceneHUD,this.cameraHUD);
+		buffer.render(this.sceneHUD,this.cameraHUD);		
+		//buffer.render(this.scene,this.camera);
     }
-	
-	/*
-	onMouseMove( event )
-	{
 
-	// calculate mouse position in normalized device coordinates
-	// (-1 to +1) for both components
-
-	this.mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
-	this.mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-
-	}
-	*/
 }
+
+
 
 
 

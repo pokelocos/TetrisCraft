@@ -1,6 +1,7 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
-var state = 1;
+var controller;
+var state = 0;
 
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
@@ -13,8 +14,9 @@ function init()
 	main = new MainMenu();
 	instructions = new Instructions();
 	options = new Options();	
-
-	this.renderer = new THREE.WebGLRenderer({antialias:true});
+	this.controller = new Controller();
+	this.renderer = new THREE.WebGLRenderer({antialias:true, alpha: true});
+	this.renderer.autoClear = false;
     this.renderer.setSize(window.innerWidth, window.innerHeight);
 	this.renderer.shadowMap.enabled = true;
 	this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
@@ -25,7 +27,9 @@ function init()
 
 function loop() 
 {
-	requestAnimationFrame(loop);
+	requestAnimationFrame(loop);	
+	controller.Update();
+	//this.renderer.clear();
 	switch(state)
 	{
 		case 0:
@@ -40,7 +44,7 @@ function loop()
 			instructions.Update();
 			instructions.Draw(this.renderer);
 			break;
-		case 2:
+		case 3:
 			options.Update();
 			Option.Draw(this.renderer);
 			break;
@@ -50,5 +54,7 @@ function loop()
 	}
 }
 
+
 requestAnimationFrame(loop);
+
 
