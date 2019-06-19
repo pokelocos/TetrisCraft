@@ -15,18 +15,18 @@ class Cube
     OnShapeUpdate(shape)
     {
         this.mesh.position.set(
-            this.position.x*gridSize + shape.position.x*gridSize + gridSize/2,
-            this.position.y*gridSize + shape.position.y*gridSize + gridSize/2,
-            this.position.z*gridSize + shape.position.z*gridSize + gridSize/2,
+            this.position.x * gridSize + shape.position.x * gridSize + gridSize/2,
+            this.position.y * gridSize + shape.position.y * gridSize + gridSize/2,
+            this.position.z * gridSize + shape.position.z * gridSize + gridSize/2,
         );
     }
 
     Update()
     {
 		this.mesh.position.set(
-				this.position.x*gridSize,
-				this.position.y*gridSize + gridSize/2,
-				this.position.z*gridSize,
+				this.position.x * gridSize,
+				this.position.y * gridSize + gridSize/2,
+				this.position.z * gridSize,
 			);
     }
 
@@ -42,21 +42,24 @@ class Cube
 
     Rotate(euler)
     {
+		if(this.position.x == 0 && this.position.y == 0 && this.position.z == 0 ) {return;}
         this.position.applyEuler(euler);
     }
 
     RotateX(x)
     {
-        this.Rotate(new THREE.Euler(THREE.deg(90)*x,0,0));
+		console.log("aaaa");
+        this.Rotate(new THREE.Euler(THREE.Math.degToRad(90)*x,0,0));
     }
 
     RotateY(y)
     {
-        this.Rotate(new THREE.Euler(0,THREE.deg(90),0)*y);
+        this.Rotate(new THREE.Euler(0,THREE.Math.degToRad(90)*y,0));
     }
 
     RotateZ(z)
     {
-        this.Rotate(new THREE.Euler(0,0,THREE.deg(90)*z));
+        this.Rotate(new THREE.Euler(0,0,THREE.Math.degToRad(90)*z));
     }
+	
 }

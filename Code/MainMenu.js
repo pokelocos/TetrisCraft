@@ -61,7 +61,6 @@ class MainMenu
 		}
 		
 		this.selector.setPosition(0,posY,0);	
-		console.log(keyDown.includes(38) +"&&"+selected);
 		
 		if (keyDown.includes(38) && selected > 0)
 		{

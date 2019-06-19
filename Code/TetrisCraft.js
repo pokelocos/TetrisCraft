@@ -1,7 +1,13 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
 var controller;
-var state = 1;
+var state = 0;
+/*
+var animate = window.requestAnimationFrame || window.webkitRequestAnimationFrame || 
+window.mozRequestAnimationFrame || function (callback) 
+{
+        window.setTimeout(callback, 1000 / 60)
+};*/
 
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
@@ -55,6 +61,6 @@ function loop()
 }
 
 
-requestAnimationFrame(loop);
+requestAnimationFrame(loop, 1000 / 60);
 
 

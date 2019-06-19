@@ -2,6 +2,19 @@ class Game
 {
     constructor(renderer)
     {
+		
+		this.sceneHUD = new THREE.Scene();
+		this.cameraHUD =new THREE.OrthographicCamera( window.innerWidth / - 20, window.innerWidth / 20, window.innerHeight / 20, window.innerHeight / - 20, 1, 1000 );
+		//this.cameraHUD = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
+		this.cameraHUD.position.set(10,10,10);
+		this.cameraHUD.lookAt(0,0,0);
+		
+		this.barhud = new Item2D('../Assets/barHUD.png',54.6,8);
+		this.barhud.setPosition(0,(-window.innerHeight/2  + 10)/10,0);
+		this.barhud.mesh.lookAt(10,10,10);
+		this.sceneHUD.add(this.barhud.mesh);
+		
+		
 		this.scene = new THREE.Scene();
         this.shape;
 		this.nextShapes = [];
@@ -15,6 +28,7 @@ class Game
 
 		this.camera.position.set(-7,12,-7);
 		this.camera.lookAt(3.5,6,3.5);
+
 
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		gridHelper.position.set(3.5,0,3.5);
@@ -31,17 +45,24 @@ class Game
 			}
 		}*/
 
+		/*
 		var light = new THREE.PointLight( 0xddffdd, 0.4 );
 		light.position.set(-70,-70,70);
 		this.scene.add( light );
+		
 		var light2 = new THREE.PointLight( 0xffdddd, 0.4 );
 		light.position.set(-70,70,70);
 		this.scene.add( light2 );
 		var light3 = new THREE.PointLight( 0xddddff, 0.4 );
 		light.position.set(70,-70,70);
 		this.scene.add( light3 );
+		*/
+		
+		this.ambientHUD = new THREE.AmbientLight( 0xffffff, 1);
+		//this.light.castShadow = true; 
+		this.sceneHUD.add(this.ambientHUD);
 
-		this.ambient = new THREE.AmbientLight( 0xffffff, 0.1);
+		this.ambient = new THREE.AmbientLight( 0xffffff, 1);
 		//this.light.castShadow = true; 
 		this.scene.add(this.ambient);
 
@@ -51,6 +72,12 @@ class Game
 		this.composer.addPass(this.renderPass);
 		this.saoPass = new THREE.SAOPass( this.scene, this.camera, false, true );
 		this.composer.addPass(this.saoPass);
+		
+		this.speed  = 0.1;
+        this.time = 0.0;
+		
+		this.gameOver = false;
+		
 		this.Start();
 	}
 	
@@ -62,59 +89,154 @@ class Game
 
     Update()
     {
-		this.world.Update();
-		var y = this.CheckShapeCollision()
-		if(y != -1)
-		{
-			if(y < this.world.heigth)
+		if(this.gameOver){console.log("game over");return;}
+		//this.world.Update();
+		this.shape.Update();
+		
+		// Intento bajar, si esta vacio bajo
+		if(this.time >= (1/this.speed)*10 || press.includes(32))
+        {
+			this.time = 0;
+			
+			if(!this.CheckShapeCollision(0,-1,0))
 			{
-				this.ShapeToWorld();
-				this.SpawnShape();
+				this.shape.Translate(0,-1,0);
+				
 			}
 			else
 			{
-				//perdiste
+				if(!this.CheckTopCollision())
+				{
+					this.ShapeToWorld();
+					this.SpawnShape();
+				}
+				else
+				{
+					this.gameOver = true;
+					// perdiste
+				}
 			}
 		}
-		else
+		
+		
+		//up
+		if(keyDown.includes(38))
 		{
-			this.shape.Update();
-		}
+			console.log("up");
+			if(!this.CheckShapeCollision(1,0,0))
+			{
+				this.shape.Translate(1,0,0);
+			}
+		} 
+		//left
+		else if(keyDown.includes(37))
+		{
+			if(!this.CheckShapeCollision(0,0,1))
+			{
+				this.shape.Translate(0,0,1);
+			}
+		} 
+		//rigth
+		else if(keyDown.includes(39))
+		{
+			if(!this.CheckShapeCollision(0,0,-1))
+			{
+				this.shape.Translate(0,0,-1);
+			}
+		} 
+		//down
+		else if(keyDown.includes(40))
+		{
+			if(!this.CheckShapeCollision(-1,0,0))
+			{
+				this.shape.Translate(-1,0,0);
+			}
+		} 
+		//keyQ
+		if(keyDown.includes(81))
+		{
+			this.shape.Rotate(new THREE.Vector3(1,0,0));
+			if(this.CheckShapeCollision(0,0,0))
+			{
+				this.shape.Rotate(new THREE.Vector3(-1,0,0));
+			}
+			
+		} 
+		//keyW
+		else if(keyDown.includes(87))
+		{
+			this.shape.Rotate(new THREE.Vector3(0,1,0));
+			if(this.CheckShapeCollision(0,0,0))
+			{
+				this.shape.Rotate(new THREE.Vector3(0,-1,0));
+			}
+		} 
+		//keyE
+		else if(keyDown.includes(69))
+		{
+			this.shape.Rotate(new THREE.Vector3(0,0,1));
+			if(this.CheckShapeCollision(0,0,0))
+			{
+				this.shape.Rotate(new THREE.Vector3(0,0,-1));
+			}
+		} 
+		
+		this.time++;
     }
 
     Draw(buffer)
     {
         buffer.render(this.scene,this.camera);
+		buffer.render(this.sceneHUD,this.cameraHUD);
     }
 
     SpawnShape()
     {
-		this.shape = this.nextShapes[0];
+		for(var i = 0; i < this.nextShapes[0].cubes.length; i++)
+		{
+			this.sceneHUD.remove(this.nextShapes[0].cubes[i].mesh);
+			this.scene.add(this.nextShapes[0].cubes[i].mesh);
+		}
+		
+		this.shape = this.nextShapes[0];					
 		this.shape.position.set((this.world.width - gridSize)/2,
 								this.world.heigth,
 								(this.world.deep - gridSize)/2);
 		this.ReorderHints();
 		this.GenerateNewHints(0,0,0,1);
 	}
-
-	CheckShapeCollision()
+	
+	CheckShapeCollision(dx,dy,dz)
 	{
 		for(var i = 0; i < this.shape.cubes.length; i++)
 		{
-			var x = this.shape.cubes[i].position.x + this.shape.position.x;
-			var y = this.shape.cubes[i].position.y + this.shape.position.y;
-			var z = this.shape.cubes[i].position.z + this.shape.position.z;
-			if(y == 0)
-			{ 
-				return y;
+			var x = this.shape.cubes[i].position.x + this.shape.position.x + dx;
+			var y = this.shape.cubes[i].position.y + this.shape.position.y + dy;
+			var z = this.shape.cubes[i].position.z + this.shape.position.z + dz;
+			if(y < 0 || x < 0 || z <0 || x > this.world.width|| z > this.world.deep)
+			{
+				return true;
 			}
-			else if(this.world.map[x][z][y-1] != undefined)
-			{ 
-				return y-1;
+			if(this.world.map[x][z][y] != null)
+			{
+				return true;
 			}
 		}
-		return -1;
+		return false;
 	}
+
+	CheckTopCollision()
+	{
+		for(var i = 0; i < this.shape.cubes.length; i++)
+		{
+			if(this.shape.cubes[i].position.y + this.shape.position.y >= this.world.heigth)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 
 	ShapeToWorld()
 	{
@@ -135,9 +257,8 @@ class Game
 			{
 				this.nextShapes[i] = new Shape(x + i*delta,y,z,
 									shapes[Math.floor(Math.random()*shapes.length)],
-									this.scene,
-									stage);
-			}
+									this.sceneHUD);
+			}	
 		}
 	}
 
@@ -146,7 +267,7 @@ class Game
 		for(var i = 1; i < this.hintLimit; i++)
 		{
 			this.nextShapes[i-1] = this.nextShapes[i];
-			this.nextShapes[i] = null;
+			this.nextShapes[i] = undefined;
 		}
 	}
 }

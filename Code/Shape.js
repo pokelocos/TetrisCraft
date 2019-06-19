@@ -1,40 +1,29 @@
 class Shape
 {
-    constructor(x,y,z,cubePos,scene,speed)
+    constructor(x,y,z,cubePos,scene)
     {
         this.position = new THREE.Vector3(x,y,z);
         this.cubePos = cubePos;
         this.cubes = [];
         var type = Math.floor(Math.random()*materials.length);
+		
         for(var i = 0; i < this.cubePos.length; i++)
         {
-            this.cubes[i] = new Cube(this.cubePos[i].x,
-                                    this.cubePos[i].y,
-                                    this.cubePos[i].z,
-                                    type);
+            this.cubes[i] = new Cube(this.cubePos[i].x,this.cubePos[i].y,this.cubePos[i].z,type);
         }
         for(var i = 0; i < this.cubes.length; i++)
         {
             scene.add(this.cubes[i].mesh);
         }
-        //speed on ticks
-        this.speed = speed;
-        this.time = 0;
+   
     }
 
     Update()
     {
-        //console.log("hi");
-        if(this.time >= (1/this.speed)*10)
+        for(var i = 0; i < this.cubes.length; i++) 
         {
-            this.Translate(0,-gridSize,0);
-            this.time = 0;
-        }
-        for(var i = 0; i < this.cubes.length; i++)
-        {
-            this.cubes[i].OnShapeUpdate(this);
-        }
-        this.time++;
+			this.cubes[i].OnShapeUpdate(this);
+		}
     }
 
     Translate(x,y,z)
@@ -44,13 +33,43 @@ class Shape
         this.position.z += z;
     }
 
-    Rotate(rotation)
+    Rotate(rotation) 
     {
-        for(var cube in cubes)
+        for(var i = 0; i < this.cubes.length; i++) 
         {
-            cube.RotateX(rotation.x);
-            cube.RotateY(rotation.y);
-            cube.RotateZ(rotation.z);
+            this.cubes[i].RotateX(rotation.x);
+            this.cubes[i].RotateY(rotation.y);
+            this.cubes[i].RotateZ(rotation.z);
         }
     }
+	
+	RotationX()
+	{
+		for(var i = 0; i < this.cubes.length; i++) 
+        {
+			var temp = this.cubes[i].position.y;
+			this.cubes[i].position.y = this.cubes[i].position.z;
+			this.cubes[i].position.z = temp;
+		}
+	}
+	
+	RotationY()
+	{
+		for(var i = 0; i < this.cubes.length; i++) //??
+        {
+			var temp = this.cubes[i].position.x;
+			this.cubes[i].position.x = this.cubes[i].position.z;
+			this.cubes[i].position.z = temp;
+		}
+	}
+	
+	RotationZ()
+	{
+		for(var i = 0; i < this.cubes.length; i++) //??
+        {
+			var temp = this.cubes[i].position.y;
+			this.cubes[i].position.y = this.cubes[i].position.x;
+			this.cubes[i].position.x = temp;
+		}
+	}
 }
