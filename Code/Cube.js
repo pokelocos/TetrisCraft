@@ -44,11 +44,11 @@ class Cube
     {
 		if(this.position.x == 0 && this.position.y == 0 && this.position.z == 0 ) {return;}
         this.position.applyEuler(euler);
+		this.position.set(Math.round(this.position.x),Math.round(this.position.y),Math.round(this.position.z));
     }
 
     RotateX(x)
     {
-		console.log("aaaa");
         this.Rotate(new THREE.Euler(THREE.Math.degToRad(90)*x,0,0));
     }
 

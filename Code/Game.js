@@ -158,7 +158,7 @@ class Game
 			this.shape.Rotate(new THREE.Vector3(1,0,0));
 			if(this.CheckShapeCollision(0,0,0))
 			{
-				this.shape.Rotate(new THREE.Vector3(-1,0,0));
+				this.shape.Rotate(new THREE.Vector3(3,0,0));
 			}
 			
 		} 
@@ -168,7 +168,7 @@ class Game
 			this.shape.Rotate(new THREE.Vector3(0,1,0));
 			if(this.CheckShapeCollision(0,0,0))
 			{
-				this.shape.Rotate(new THREE.Vector3(0,-1,0));
+				this.shape.Rotate(new THREE.Vector3(0,3,0));
 			}
 		} 
 		//keyE
@@ -177,7 +177,7 @@ class Game
 			this.shape.Rotate(new THREE.Vector3(0,0,1));
 			if(this.CheckShapeCollision(0,0,0))
 			{
-				this.shape.Rotate(new THREE.Vector3(0,0,-1));
+				this.shape.Rotate(new THREE.Vector3(0,0,3));
 			}
 		} 
 		
@@ -217,6 +217,7 @@ class Game
 			{
 				return true;
 			}
+			console.log(x+","+y+","+z);
 			if(this.world.map[x][z][y] != null)
 			{
 				return true;
