@@ -2,7 +2,6 @@ class Game
 {
     constructor(renderer)
     {
-		
 		this.sceneHUD = new THREE.Scene();
 		this.cameraHUD =new THREE.OrthographicCamera( window.innerWidth / - 20, window.innerWidth / 20, window.innerHeight / 20, window.innerHeight / - 20, 1, 1000 );
 		//this.cameraHUD = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
@@ -13,8 +12,15 @@ class Game
 		this.barhud.setPosition(0,(-window.innerHeight/2  + 10)/10,0);
 		this.barhud.mesh.lookAt(10,10,10);
 		this.sceneHUD.add(this.barhud.mesh);
-		
-		
+		this.score = 0;
+
+		//----------------------Score	
+		this.scoreTextMesh = this.InitScoreText();
+		this.scoreTextMesh.position.set(20,0,-20);
+		this.scoreTextMesh.rotation.set(0,Math.PI/4,0);	
+		this.sceneHUD.add(this.scoreTextMesh);
+		//----------------------Score
+
 		this.scene = new THREE.Scene();
         this.shape;
 		this.nextShapes = [];
@@ -92,7 +98,6 @@ class Game
 		if(this.gameOver){console.log("game over");return;}
 		//this.world.Update();
 		this.shape.Update();
-		
 		// Intento bajar, si esta vacio bajo
 		if(this.time >= (1/this.speed)*10 || press.includes(32))
         {
@@ -218,6 +223,7 @@ class Game
 				return true;
 			}
 			console.log(x+","+y+","+z);
+			
 			if(this.world.map[x][z][y] != null)
 			{
 				return true;
@@ -237,7 +243,6 @@ class Game
 		}
 		return false;
 	}
-
 
 	ShapeToWorld()
 	{
@@ -270,5 +275,21 @@ class Game
 			this.nextShapes[i-1] = this.nextShapes[i];
 			this.nextShapes[i] = undefined;
 		}
+	}
+
+	InitScoreText()
+	{
+		var canvas1 = document.createElement('canvas');
+		var context1 = canvas1.getContext('2d');
+		context1.font = "20px Arial";
+		context1.fillStyle = "#000000";
+		context1.fillText('Score: ' + this.score, 50, 50);	
+		var texture1 = new THREE.Texture(canvas1) 
+		texture1.needsUpdate = true;		
+		var material1 = new THREE.MeshBasicMaterial( {map: texture1, side:THREE.DoubleSide } );
+		material1.transparent = true;
+		var textMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,20),material1);
+		textMesh.needsUpdate = true;
+		return textMesh;
 	}
 }
