@@ -94,7 +94,7 @@ class Game
 	}
 
     Update()
-    {
+    {	
 		if(this.gameOver){console.log("game over");return;}
 		//this.world.Update();
 		this.shape.Update();
@@ -291,5 +291,15 @@ class Game
 		var textMesh = new THREE.Mesh(new THREE.PlaneGeometry(30,20),material1);
 		textMesh.needsUpdate = true;
 		return textMesh;
+	}
+
+	UpdateScoreText(score)
+	{
+		this.score+=score;
+		this.sceneHUD.remove(this.scoreTextMesh);
+		this.scoreTextMesh = this.InitScoreText();
+		this.scoreTextMesh.position.set(20,0,-20);
+		this.scoreTextMesh.rotation.set(0,Math.PI/4,0);	
+		this.sceneHUD.add(this.scoreTextMesh);
 	}
 }
