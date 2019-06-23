@@ -1,3 +1,5 @@
+var dificulty = 1;
+
 class Game
 {
     constructor(renderer)
@@ -26,13 +28,12 @@ class Game
 		this.nextShapes = [];
 		this.hintLimit = 3;
 		this.world = new World(7,7,12);
-		this.stage = 1;
         
 		this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
 		//var size = 78;
 		//this.camera = new THREE.OrthographicCamera(window.innerWidth/size, -window.innerWidth/size, window.innerHeight/size, -window.innerHeight/size, 1, 100);
 
-		this.camera.position.set(-7,12,-7);
+		this.camera.position.set(-7,18,-7);
 		this.camera.lookAt(3.5,6,3.5);
 
 
@@ -79,7 +80,7 @@ class Game
 		this.saoPass = new THREE.SAOPass( this.scene, this.camera, false, true );
 		this.composer.addPass(this.saoPass);
 		
-		this.speed  = 0.1;
+		this.speed  = 0.1 * dificulty;
         this.time = 0.0;
 		
 		this.gameOver = false;
@@ -106,7 +107,6 @@ class Game
 			if(!this.CheckShapeCollision(0,-1,0))
 			{
 				this.shape.Translate(0,-1,0);
-				
 			}
 			else
 			{
@@ -218,6 +218,7 @@ class Game
 			var x = this.shape.cubes[i].position.x + this.shape.position.x + dx;
 			var y = this.shape.cubes[i].position.y + this.shape.position.y + dy;
 			var z = this.shape.cubes[i].position.z + this.shape.position.z + dz;
+			
 			if(y < 0 || x < 0 || z <0 || x > this.world.width|| z > this.world.deep)
 			{
 				return true;
