@@ -25,6 +25,7 @@ class Game
 
 		this.scene = new THREE.Scene();
         this.shape;
+		this.shape_proyection;
 		this.nextShapes = [];
 		this.hintLimit = 3;
 		this.world = new World(7,7,12);
@@ -99,6 +100,7 @@ class Game
 		if(this.gameOver){console.log("game over");return;}
 		//this.world.Update();
 		this.shape.Update();
+		
 		// Intento bajar, si esta vacio bajo
 		if(this.time >= (1/this.speed)*10 || press.includes(32))
         {
@@ -207,6 +209,12 @@ class Game
 		this.shape.position.set((this.world.width - gridSize)/2,
 								this.world.heigth,
 								(this.world.deep - gridSize)/2);
+
+		this.shape_proyection = this.shape.Clone(this.scene);
+		this.shape_proyection.position = this.shape.position;
+		this.shape_proyection.ChangueMaterial(12);
+
+
 		this.ReorderHints();
 		this.GenerateNewHints(0,0,0,1);
 	}

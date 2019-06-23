@@ -12,6 +12,10 @@ class Cube
 		this.Update(this.mesh);
     }
 
+	SetMaterial(id){
+		this.mesh.material = materials[id];
+	}
+
     OnShapeUpdate(shape)
     {
         this.mesh.position.set(

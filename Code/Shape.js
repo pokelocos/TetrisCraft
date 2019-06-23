@@ -5,7 +5,7 @@ class Shape
         this.position = new THREE.Vector3(x,y,z);
         this.cubePos = cubePos;
         this.cubes = [];
-        var type = Math.floor(Math.random()*materials.length);
+        var type = Math.floor(Math.random()*materials.length-1);
 		
         for(var i = 0; i < this.cubePos.length; i++)
         {
@@ -15,8 +15,27 @@ class Shape
         {
             scene.add(this.cubes[i].mesh);
         }
-   
     }
+
+	ChangueMaterial(materialID)
+	{
+		for(var i = 0; i < this.cubes.length; i++)
+        {
+            this.cubes[i].SetMaterial(materialID);
+        }
+	}
+
+	Clone(scene){
+		
+		var clone = new Shape(this.position.x, this.position.y, this.position.z, this.cubePos, scene);
+
+		for(var i = 0; i < clone.cubes.length; i++)
+        {
+            scene.add(clone.cubes[i].mesh);
+        }
+
+		return clone;
+	}
 
     Update()
     {

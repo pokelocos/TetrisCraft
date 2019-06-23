@@ -18,6 +18,7 @@ texture[12] = loader.load('../Assets/textures/block/tnt_side.png');
 texture[13] = loader.load('../Assets/textures/block/tnt_bottom.png');
 texture[14] = loader.load('../Assets/textures/block/grass_block_side.png');
 texture[15] = loader.load('../Assets/textures/block/grass_block_top.png');
+texture[16] = loader.load('../Assets/textures/block/glass.png');
 
 texture.forEach(function (item) {
 	item.magFilter = THREE.NearestFilter;
@@ -142,3 +143,13 @@ materials[11] = [
 	new THREE.MeshPhongMaterial({map: texture[12]}),//Left
 	new THREE.MeshPhongMaterial({map: texture[12]})//Right
   ];
+
+  //Selector
+  materials[12] = [
+    new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Back
+	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Front
+	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Top
+	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Bottom
+	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Left
+	new THREE.MeshLambertMaterial({map: texture[16], transparent: true})//Right
+  ];      
