@@ -46,8 +46,10 @@ class MainMenu
 		
 		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
 		this.selector.setPosition(0,posY,0);
-		this.sceneHUD.add(this.selector.mesh);	
-			
+		this.sceneHUD.add(this.selector.mesh);
+		
+		this.clickSound = new Audio('../Sounds/click.mp3');
+		this.selectSound = new Audio('../Sounds/harp.mp3');	
 	}
 	
 	Update()
@@ -64,11 +66,13 @@ class MainMenu
 		
 		if (keyDown.includes(38) && selected > 0)
 		{
+			this.clickSound.play();
 			selected--;
 			posY += 70;
 		}
 		else if (keyDown.includes(40) && selected < 3)
 		{
+			this.clickSound.play();
 			selected++;
 			posY -= 70;
 		}
@@ -77,6 +81,7 @@ class MainMenu
 		{
 			if(selected != 3)
 			{
+				this.selectSound.play();
 				state = links[selected];
 			}
 			else

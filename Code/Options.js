@@ -48,6 +48,9 @@ class Options
 		
 		this.selected = 0;
 		this.posY = 70;
+		
+		this.clickSound = new Audio('../Sounds/click.mp3');
+		this.selectSound = new Audio('../Sounds/harp.mp3');	
 	}
 	
 	Update()
@@ -57,20 +60,22 @@ class Options
 		
 		if (keyDown.includes(38) && this.selected > 0)
 		{
+			this.clickSound.play();
 			this.selected--;
 			this.posY += 70;
 		}
 		else if (keyDown.includes(40) && this.selected < 1)
 		{
+			this.clickSound.play();
 			this.selected++;
 			this.posY -= 70;
 		}
 		
 		if (keyDown.includes(32) || keyDown.includes(13))
 		{
+			this.selectSound.play();
 			if(this.selected == 0)
 			{
-				console.log(dificulty);
 				switch(dificulty)
 				{
 					case 1:

@@ -66,12 +66,14 @@ class Instructions
 		this.eKey.setPosition(400+70,0,0);
 		this.sceneHUD.add(this.eKey.mesh)
 		
+		this.selectSound = new Audio('../Sounds/harp.mp3')
 	}
 	
 	Update()
     {
 		if (keyDown.includes(32) || keyDown.includes(13))
 		{
+			this.selectSound.play();
 			state = 0;
 		}
     }

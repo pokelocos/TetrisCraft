@@ -17,6 +17,9 @@ loop();
 
 function init() 
 {
+	this.mySound = new Audio('../Sounds/MinecraftMusicfullPlaylist.mp3');
+	this.mySound.play();
+	
 	main = new MainMenu();
 	instructions = new Instructions();
 	options = new Options();	
