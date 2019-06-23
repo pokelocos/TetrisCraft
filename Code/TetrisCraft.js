@@ -52,7 +52,7 @@ function loop()
 			break;
 		case 3:
 			options.Update();
-			Option.Draw(this.renderer);
+			options.Draw(this.renderer);
 			break;
 		default:
 			Conosole.Log("[Scene 'id' error, id: "+state+" not found]");
