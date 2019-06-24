@@ -106,3 +106,12 @@ shapes[11] = [
     new THREE.Vector3(1,0,-1),
     new THREE.Vector3(-1,0,-1),
 ]
+
+for(var i = 0; i < 7 ; i++)
+{
+    for(var j = 0; j < 7; j++)
+    {
+        shapes[12][i*7 + j] = new THREE.Vector3(i-3,0,j-3);
+    }
+}
+shapes[12][49] = new THREE.Vector3(0,-1,0);
