@@ -36,7 +36,7 @@ class Cube
                     {
                         for(var z = -1; z < 2; z++)
                         {
-                            world.RemoveFromWorld(this.position.x + x, this.position.y + y, this.position.z+z);
+                            world.RemoveFromWorld(this.position.x + x, this.position.z + z, this.position.y+y);
                         }
                     }
                 }
@@ -52,8 +52,10 @@ class Cube
             case 1: 
                 if(this.position.y > 0)
                 {
-                    if(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
+                        for(var i = 0; i <= (1/dificulty)*100; i++)
+                        { }
                         this.position.y -= 1;
                     }
                 }
@@ -61,8 +63,10 @@ class Cube
             case 2:
                 if(this.position.y > 0)
                 {
-                    if(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
+                        for(var i = 0; i <= (1/dificulty)*100; i++)
+                        { }
                         this.position.y -= 1;
                     }
                 }
