@@ -17,6 +17,9 @@ loop();
 
 function init() 
 {
+	this.mySound = new Audio('../Sounds/MinecraftMusicfullPlaylist.mp3');
+	this.mySound.play();
+	
 	main = new MainMenu();
 	instructions = new Instructions();
 	options = new Options();	
@@ -52,7 +55,7 @@ function loop()
 			break;
 		case 3:
 			options.Update();
-			Option.Draw(this.renderer);
+			options.Draw(this.renderer);
 			break;
 		default:
 			Conosole.Log("[Scene 'id' error, id: "+state+" not found]");
