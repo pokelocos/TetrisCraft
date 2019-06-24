@@ -51,6 +51,10 @@ class Options
 		
 		this.clickSound = new Audio('../Sounds/click.mp3');
 		this.selectSound = new Audio('../Sounds/harp.mp3');	
+
+		this.OptionsTitle = this.InitText("Options",0,100,260,140,80);
+		this.OptionsTitle.position.set(10,300,2);
+		this.sceneHUD.add(this.OptionsTitle);
 	}
 	
 	Update()
@@ -110,6 +114,22 @@ class Options
     Draw(buffer)
     {
         buffer.render(this.sceneHUD,this.cameraHUD);
-    }
+	}
+	
+	InitText(sentence,x,y,width,height,fontSize)
+	{
+		var canvas1 = document.createElement('canvas');
+		var context1 = canvas1.getContext('2d');
+		context1.font = fontSize+"px MinecraftFont";
+		context1.fillStyle = "#ffffff";
+		context1.fillText(sentence, x, y);	
+		var texture1 = new THREE.Texture(canvas1) 
+		texture1.needsUpdate = true;		
+		var material1 = new THREE.MeshBasicMaterial( {map: texture1, side:THREE.DoubleSide } );
+		material1.transparent = true;
+		var textMesh = new THREE.Mesh(new THREE.PlaneGeometry(width,height),material1);
+		textMesh.needsUpdate = true;
+		return textMesh;
+	}
 
 }
