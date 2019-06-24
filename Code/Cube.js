@@ -3,7 +3,7 @@ class Cube
     constructor(x,y,z,id)
     {
         this.position = new THREE.Vector3(x,y,z);
-        var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
+        this.geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
         this.mesh = new THREE.Mesh(geometry,materials[id]);
         this.id = id;
         this.score = (id+1)*10;
@@ -34,8 +34,6 @@ class Cube
                 {
                     while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
-                        for(var i = 0; i <= (1/dificulty)*100; i++)
-                        { }
                         this.position.y -= 1;
                     }
                 }
@@ -45,8 +43,6 @@ class Cube
                 {
                     while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
-                        for(var i = 0; i <= (1/dificulty)*100; i++)
-                        { }
                         this.position.y -= 1;
                     }
                 }
@@ -65,6 +61,11 @@ class Cube
             break;
             default: break;
 		}
+        this.mesh.position.set(
+            this.position.x * gridSize + gridSize/2,
+            this.position.y * gridSize + gridSize/2,
+            this.position.z * gridSize + gridSize/2,
+        );
     }
     
     Update(world)
@@ -76,8 +77,6 @@ class Cube
                 {
                     while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
-                        for(var i = 0; i <= (1/dificulty)*100; i++)
-                        { }
                         this.position.y -= 1;
                     }
                 }
@@ -87,8 +86,6 @@ class Cube
                 {
                     while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
                     {
-                        for(var i = 0; i <= (1/dificulty)*100; i++)
-                        { }
                         this.position.y -= 1;
                     }
                 }
@@ -103,7 +100,9 @@ class Cube
     }
 
 	Destroy(scene){
+        this.geometry.dispose();
         scene.remove(this.mesh);
+        this.mesh.dispose();
         delete(this);
 	}
 
