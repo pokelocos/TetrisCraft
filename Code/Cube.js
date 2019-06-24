@@ -28,7 +28,29 @@ class Cube
 
 	Start(world){
         switch(this.id)
-		{
+        {
+            case 1: 
+                if(this.position.y > 0)
+                {
+                    while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    {
+                        for(var i = 0; i <= (1/dificulty)*100; i++)
+                        { }
+                        this.position.y -= 1;
+                    }
+                }
+            break;
+            case 2:
+                if(this.position.y > 0)
+                {
+                    while(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    {
+                        for(var i = 0; i <= (1/dificulty)*100; i++)
+                        { }
+                        this.position.y -= 1;
+                    }
+                }
+            break;
             case 13:
                 for(var y = -1; y < 2; y++)
                 {
