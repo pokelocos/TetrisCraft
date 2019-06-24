@@ -100,13 +100,20 @@ class Game
 		if(this.gameOver){console.log("game over");return;}
 		//this.world.Update();
 		this.shape.Update();
+		this.shape_proyection.Update();
 		
+		this.shape_proyection.SetPos(this.shape.position.x,this.shape.position.y,this.shape.position.z);
+
+		while(!this.CheckShapeCollision(0,-1,0, this.shape_proyection)){
+			this.shape_proyection.Translate(0,-1,0);
+		}
+
 		// Intento bajar, si esta vacio bajo
 		if(this.time >= (1/this.speed)*10 || press.includes(32))
         {
 			this.time = 0;
 			
-			if(!this.CheckShapeCollision(0,-1,0))
+			if(!this.CheckShapeCollision(0,-1,0, this.shape))
 			{
 				this.shape.Translate(0,-1,0);
 			}
@@ -129,8 +136,7 @@ class Game
 		//up
 		if(keyDown.includes(38))
 		{
-			console.log("up");
-			if(!this.CheckShapeCollision(1,0,0))
+			if(!this.CheckShapeCollision(1,0,0, this.shape))
 			{
 				this.shape.Translate(1,0,0);
 			}
@@ -138,23 +144,23 @@ class Game
 		//left
 		else if(keyDown.includes(37))
 		{
-			if(!this.CheckShapeCollision(0,0,1))
+			if(!this.CheckShapeCollision(0,0,1, this.shape))
 			{
-				this.shape.Translate(0,0,1);
+				this.shape.Translate(0,0,-1);
 			}
 		} 
 		//rigth
 		else if(keyDown.includes(39))
 		{
-			if(!this.CheckShapeCollision(0,0,-1))
+			if(!this.CheckShapeCollision(0,0,-1, this.shape))
 			{
-				this.shape.Translate(0,0,-1);
+				this.shape.Translate(0,0,1);
 			}
 		} 
 		//down
 		else if(keyDown.includes(40))
 		{
-			if(!this.CheckShapeCollision(-1,0,0))
+			if(!this.CheckShapeCollision(-1,0,0, this.shape))
 			{
 				this.shape.Translate(-1,0,0);
 			}
@@ -163,8 +169,10 @@ class Game
 		if(keyDown.includes(81))
 		{
 			this.shape.Rotate(new THREE.Vector3(1,0,0));
-			if(this.CheckShapeCollision(0,0,0))
+			this.shape_proyection.Rotate(new THREE.Vector3(1,0,0));
+			if(this.CheckShapeCollision(0,0,0, this.shape))
 			{
+				this.shape_proyection.Rotate(new THREE.Vector3(3,0,0));
 				this.shape.Rotate(new THREE.Vector3(3,0,0));
 			}
 			
@@ -173,8 +181,10 @@ class Game
 		else if(keyDown.includes(87))
 		{
 			this.shape.Rotate(new THREE.Vector3(0,1,0));
-			if(this.CheckShapeCollision(0,0,0))
+			this.shape_proyection.Rotate(new THREE.Vector3(0,1,0));
+			if(this.CheckShapeCollision(0,0,0, this.shape))
 			{
+				this.shape_proyection.Rotate(new THREE.Vector3(0,3,0));
 				this.shape.Rotate(new THREE.Vector3(0,3,0));
 			}
 		} 
@@ -182,8 +192,10 @@ class Game
 		else if(keyDown.includes(69))
 		{
 			this.shape.Rotate(new THREE.Vector3(0,0,1));
-			if(this.CheckShapeCollision(0,0,0))
+			this.shape_proyection.Rotate(new THREE.Vector3(0,0,1));
+			if(this.CheckShapeCollision(0,0,0, this.shape))
 			{
+				this.shape_proyection.Rotate(new THREE.Vector3(0,0,3));
 				this.shape.Rotate(new THREE.Vector3(0,0,3));
 			}
 		} 
@@ -199,6 +211,9 @@ class Game
 
     SpawnShape()
     {
+		if(this.shape_proyection != null)
+			this.shape_proyection.Destroy(this.scene);
+
 		for(var i = 0; i < this.nextShapes[0].cubes.length; i++)
 		{
 			this.sceneHUD.remove(this.nextShapes[0].cubes[i].mesh);
@@ -211,7 +226,6 @@ class Game
 								(this.world.deep - gridSize)/2);
 
 		this.shape_proyection = this.shape.Clone(this.scene);
-		this.shape_proyection.position = this.shape.position;
 		this.shape_proyection.ChangueMaterial(12);
 
 
@@ -219,13 +233,13 @@ class Game
 		this.GenerateNewHints(0,0,0,1);
 	}
 	
-	CheckShapeCollision(dx,dy,dz)
+	CheckShapeCollision(dx,dy,dz, shap)
 	{
-		for(var i = 0; i < this.shape.cubes.length; i++)
+		for(var i = 0; i < shap.cubes.length; i++)
 		{
-			var x = this.shape.cubes[i].position.x + this.shape.position.x + dx;
-			var y = this.shape.cubes[i].position.y + this.shape.position.y + dy;
-			var z = this.shape.cubes[i].position.z + this.shape.position.z + dz;
+			var x = shap.cubes[i].position.x + shap.position.x + dx;
+			var y = shap.cubes[i].position.y + shap.position.y + dy;
+			var z = shap.cubes[i].position.z + shap.position.z + dz;
 			
 			if(y < 0 || x < 0 || z <0 || x > this.world.width|| z > this.world.deep)
 			{

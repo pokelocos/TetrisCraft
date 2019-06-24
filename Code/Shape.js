@@ -25,6 +25,14 @@ class Shape
         }
 	}
 
+	Destroy(scene){
+
+		for(var i = 0; i < this.cubes.length; i++)
+		{
+			scene.remove(this.cubes[i].mesh);
+		}
+	}
+
 	Clone(scene){
 		
 		var clone = new Shape(this.position.x, this.position.y, this.position.z, this.cubePos, scene);
@@ -44,6 +52,12 @@ class Shape
 			this.cubes[i].OnShapeUpdate(this);
 		}
     }
+
+	SetPos(x,y,z){
+		this.position.x = x;
+        this.position.y = y;
+        this.position.z = z;
+	}
 
     Translate(x,y,z)
     {
