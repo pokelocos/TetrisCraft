@@ -144,7 +144,7 @@ class Game
 		//left
 		else if(keyDown.includes(37))
 		{
-			if(!this.CheckShapeCollision(0,0,1, this.shape))
+			if(!this.CheckShapeCollision(0,0,-1, this.shape))
 			{
 				this.shape.Translate(0,0,-1);
 			}
@@ -152,7 +152,7 @@ class Game
 		//rigth
 		else if(keyDown.includes(39))
 		{
-			if(!this.CheckShapeCollision(0,0,-1, this.shape))
+			if(!this.CheckShapeCollision(0,0,1, this.shape))
 			{
 				this.shape.Translate(0,0,1);
 			}
@@ -237,16 +237,17 @@ class Game
 	{
 		for(var i = 0; i < shap.cubes.length; i++)
 		{
-			var x = shap.cubes[i].position.x + shap.position.x + dx;
-			var y = shap.cubes[i].position.y + shap.position.y + dy;
-			var z = shap.cubes[i].position.z + shap.position.z + dz;
+			var x = shap.cubes[i].position.x + shap.position.x;
+			var y = shap.cubes[i].position.y + shap.position.y;
+			var z = shap.cubes[i].position.z + shap.position.z;
 			
-			if(y < 0 || x < 0 || z <0 || x > this.world.width|| z > this.world.deep)
+			if(y + dy < 0 || x + dx < 0 || z + dz <0 ||
+				x + dx >= this.world.width|| z + dz >= this.world.deep)
 			{
 				return true;
 			}
-			
-			if(this.world.map[x][z][y] != null)
+
+			if(this.world.map[x+dx][z+dz][y+dy] != undefined)
 			{
 				return true;
 			}
