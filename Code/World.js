@@ -41,6 +41,7 @@ class World
 				}
 			}
 		}
+
 	}
 	
 	Draw()
@@ -60,8 +61,9 @@ class World
 		}
 	}
 
-	AddToWorld(x,y,z,cube){
-		cube.position.set(x,y,z);
+	AddToWorld(x,y,z,cube)
+	{
+		cube.position.set(x,y,z);		
 		this.map[x][z][y] = cube;
 		cube.Start(this);
 	}
@@ -71,7 +73,8 @@ class World
 		{
 			if(x < this.width && z < this.deep && y < this.height)
 			{
-				if(this.map[x][z][y] != undefined){
+				if(this.map[x][z][y] != undefined)
+				{
 					console.log("destroing");
 					this.map[x][z][y].Destroy(this.scene);
 				}
@@ -115,32 +118,28 @@ class World
 		}
 		return true;
 	}
+	
+	
+
+
 
 	RemoveLayer(z)
-	{
+	{		
+	
+		if(z >= this.height || z < 0){return; }
+		
+		this.score = 0;
 		for(var i=0; i<this.width; i++) 
 		{
 			for(var j=0; j<this.deep; j++) 
 			{
+				this.score += this.map[i][j][z].score;
+				this.map[i][j][z].Destroy(this.scene);
 				this.map[i][j][z] = undefined;
 			}
 		}
-		if(z == this.height || z < -1){return; }
 		
-		for(var i=0; i<this.width; i++) 
-		{
-			for(var j=0; j<this.deep; j++) 
-			{
-				for(var k=z+1; k<this.height; k++) 
-				{
-					if(this.map[i][j][k] != undefined)
-					{
-						this.map[i][j][k-1] = this.map[i][j][k];
-						this.map[i][j][k] = undefined;
-					}
-				}
-			}
-		}
+		return this.score;
 	}
 
 }

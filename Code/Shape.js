@@ -6,6 +6,7 @@ class Shape
         this.cubePos = cubePos;
         this.cubes = [];
         var type = Math.floor(Math.random()*materials.length-1);
+		if(type < 0){type = 1;}
 		
         for(var i = 0; i < this.cubePos.length; i++)
         {

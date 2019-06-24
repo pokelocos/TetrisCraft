@@ -18,7 +18,7 @@ class Game
 
 		//----------------------Score	
 		this.scoreTextMesh = this.InitScoreText();
-		this.scoreTextMesh.position.set(4,-26,0);
+		this.scoreTextMesh.position.set(4,-40,0);
 		this.scoreTextMesh.rotation.set(0,Math.PI/4,0);	
 		this.sceneHUD.add(this.scoreTextMesh);
 		//----------------------Score
@@ -85,6 +85,13 @@ class Game
         this.time = 0.0;
 		
 		this.gameOver = false;
+		/*
+		this.hudPos = [
+			new THREE.Vector3( 0, 0, 0 );
+			new THREE.Vector3( 0, 200, 0 );
+			new THREE.Vector3( 0, 400, 0 ); 
+		];
+		*/
 		
 		this.Start();
 	}
@@ -202,25 +209,17 @@ class Game
 		
 		this.time++;
 		
-		var points = 0;
-		var multiplier = 0;
-		for(var i = 0; i < this.world.heigth; i++)
+		this.multiplier = 0;
+		this.points = 0;
+		for(var i=0; i<this.world.heigth; i++) 
 		{
 			if(this.world.CheckLayer(i))
 			{
-				multiplier++;
-				for(var j=0; j<this.width; j++) 
-				{
-					for(var k=0; k<this.deep; k++) 
-					{
-						points += this.world.map[i][k][i].score;
-						this.scene.remove(this.world.map[i][k][i]);
-						this.world.map[j][k][i].Destroy(this.scene);
-					}
-				}
+				this.multiplier++;
+				this.points += this.world.RemoveLayer(i);
 			}
 		}
-		this.UpdateScoreText(points*multiplier);
+		this.UpdateScoreText(this.points*this.multiplier);
     }
 
     Draw(buffer)
@@ -306,8 +305,9 @@ class Game
 			if(this.nextShapes[i] == null)
 			{
 				var j = Math.floor(Math.random()*shapes.length);
-				if(j < 0) j = 0;
-				this.nextShapes[i] = new Shape(x + i*delta,y,z,
+				//var j = 12;
+				if(j < 0 || j== 12) j = 0;
+				this.nextShapes[i] = new Shape(x ,y* i* 20,z,
 									shapes[j],
 									this.sceneHUD);
 			}	
@@ -341,11 +341,13 @@ class Game
 
 	UpdateScoreText(score)
 	{
+	/*	
 		this.score+=score;
 		this.sceneHUD.remove(this.scoreTextMesh);
 		this.scoreTextMesh = this.InitScoreText();
-		this.scoreTextMesh.position.set(20,0,-20);
+		this.scoreTextMesh.position.set(4,-40,0);
 		this.scoreTextMesh.rotation.set(0,Math.PI/4,0);	
 		this.sceneHUD.add(this.scoreTextMesh);
+	*/	
 	}
 }

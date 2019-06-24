@@ -29,150 +29,150 @@ texture.forEach(function (item) {
 
 //Dirt
 materials[0] = [
-    new THREE.MeshPhongMaterial({map: texture[14]}),//Back
-	new THREE.MeshPhongMaterial({map: texture[14]}),//Front
-	new THREE.MeshPhongMaterial({map: texture[15]}),//Top
-	new THREE.MeshPhongMaterial({map: texture[0]}),//Bottom
-	new THREE.MeshPhongMaterial({map: texture[14]}),//Left
-	new THREE.MeshPhongMaterial({map: texture[14]})//Right
+    new THREE.MeshBasicMaterial({map: texture[14]}),//Back
+	new THREE.MeshBasicMaterial({map: texture[14]}),//Front
+	new THREE.MeshBasicMaterial({map: texture[15]}),//Top
+	new THREE.MeshBasicMaterial({map: texture[0]}),//Bottom
+	new THREE.MeshBasicMaterial({map: texture[14]}),//Left
+	new THREE.MeshBasicMaterial({map: texture[14]})//Right
 ]
 
 //Sand
 materials[1] = [
-  new THREE.MeshPhongMaterial({map: texture[17]}),//Back
-  new THREE.MeshPhongMaterial({map: texture[17]}),//Front
-  new THREE.MeshPhongMaterial({map: texture[17]}),//Top
-  new THREE.MeshPhongMaterial({map: texture[17]}),//Bottom
-  new THREE.MeshPhongMaterial({map: texture[17]}),//Left
-  new THREE.MeshPhongMaterial({map: texture[17]})//Right
+  new THREE.MeshBasicMaterial({map: texture[17]}),//Back
+  new THREE.MeshBasicMaterial({map: texture[17]}),//Front
+  new THREE.MeshBasicMaterial({map: texture[17]}),//Top
+  new THREE.MeshBasicMaterial({map: texture[17]}),//Bottom
+  new THREE.MeshBasicMaterial({map: texture[17]}),//Left
+  new THREE.MeshBasicMaterial({map: texture[17]})//Right
 ];
 
 //Gravel
 materials[2] = [
-  new THREE.MeshPhongMaterial({map: texture[18]}),//Back
-  new THREE.MeshPhongMaterial({map: texture[18]}),//Front
-  new THREE.MeshPhongMaterial({map: texture[18]}),//Top
-  new THREE.MeshPhongMaterial({map: texture[18]}),//Bottom
-  new THREE.MeshPhongMaterial({map: texture[18]}),//Left
-  new THREE.MeshPhongMaterial({map: texture[18]})//Right
+  new THREE.MeshBasicMaterial({map: texture[18]}),//Back
+  new THREE.MeshBasicMaterial({map: texture[18]}),//Front
+  new THREE.MeshBasicMaterial({map: texture[18]}),//Top
+  new THREE.MeshBasicMaterial({map: texture[18]}),//Bottom
+  new THREE.MeshBasicMaterial({map: texture[18]}),//Left
+  new THREE.MeshBasicMaterial({map: texture[18]})//Right
 ];
 
   //CobbleStone
   materials[3] = [
-    new THREE.MeshPhongMaterial({map: texture[10]}),
-	new THREE.MeshPhongMaterial({map: texture[10]}),
-	new THREE.MeshPhongMaterial({map: texture[10]}),
-	new THREE.MeshPhongMaterial({map: texture[10]}),
-	new THREE.MeshPhongMaterial({map: texture[10]}),
-	new THREE.MeshPhongMaterial({map: texture[10]})
+    new THREE.MeshBasicMaterial({map: texture[10]}),
+	new THREE.MeshBasicMaterial({map: texture[10]}),
+	new THREE.MeshBasicMaterial({map: texture[10]}),
+	new THREE.MeshBasicMaterial({map: texture[10]}),
+	new THREE.MeshBasicMaterial({map: texture[10]}),
+	new THREE.MeshBasicMaterial({map: texture[10]})
   ];
 
 //Stone
 materials[4] = [
-    new THREE.MeshPhongMaterial({map: texture[1]}),
-	new THREE.MeshPhongMaterial({map: texture[1]}),
-	new THREE.MeshPhongMaterial({map: texture[1]}),
-	new THREE.MeshPhongMaterial({map: texture[1]}),
-	new THREE.MeshPhongMaterial({map: texture[1]}),
-	new THREE.MeshPhongMaterial({map: texture[1]})
+    new THREE.MeshBasicMaterial({map: texture[1]}),
+	new THREE.MeshBasicMaterial({map: texture[1]}),
+	new THREE.MeshBasicMaterial({map: texture[1]}),
+	new THREE.MeshBasicMaterial({map: texture[1]}),
+	new THREE.MeshBasicMaterial({map: texture[1]}),
+	new THREE.MeshBasicMaterial({map: texture[1]})
   ];
 
   //Coal
 materials[5] = [
-    new THREE.MeshPhongMaterial({map: texture[2]}),
-	new THREE.MeshPhongMaterial({map: texture[2]}),
-	new THREE.MeshPhongMaterial({map: texture[2]}),
-	new THREE.MeshPhongMaterial({map: texture[2]}),
-	new THREE.MeshPhongMaterial({map: texture[2]}),
-	new THREE.MeshPhongMaterial({map: texture[2]})
+    new THREE.MeshBasicMaterial({map: texture[2]}),
+	new THREE.MeshBasicMaterial({map: texture[2]}),
+	new THREE.MeshBasicMaterial({map: texture[2]}),
+	new THREE.MeshBasicMaterial({map: texture[2]}),
+	new THREE.MeshBasicMaterial({map: texture[2]}),
+	new THREE.MeshBasicMaterial({map: texture[2]})
   ];
 
   //Iron
 materials[6] = [
-    new THREE.MeshPhongMaterial({map: texture[3]}),
-	new THREE.MeshPhongMaterial({map: texture[3]}),
-	new THREE.MeshPhongMaterial({map: texture[3]}),
-	new THREE.MeshPhongMaterial({map: texture[3]}),
-	new THREE.MeshPhongMaterial({map: texture[3]}),
-	new THREE.MeshPhongMaterial({map: texture[3]})
+    new THREE.MeshBasicMaterial({map: texture[3]}),
+	new THREE.MeshBasicMaterial({map: texture[3]}),
+	new THREE.MeshBasicMaterial({map: texture[3]}),
+	new THREE.MeshBasicMaterial({map: texture[3]}),
+	new THREE.MeshBasicMaterial({map: texture[3]}),
+	new THREE.MeshBasicMaterial({map: texture[3]})
   ];
 
   //Gold
 materials[7] = [
-    new THREE.MeshPhongMaterial({map: texture[4]}),
-	new THREE.MeshPhongMaterial({map: texture[4]}),
-	new THREE.MeshPhongMaterial({map: texture[4]}),
-	new THREE.MeshPhongMaterial({map: texture[4]}),
-	new THREE.MeshPhongMaterial({map: texture[4]}),
-	new THREE.MeshPhongMaterial({map: texture[4]})
+    new THREE.MeshBasicMaterial({map: texture[4]}),
+	new THREE.MeshBasicMaterial({map: texture[4]}),
+	new THREE.MeshBasicMaterial({map: texture[4]}),
+	new THREE.MeshBasicMaterial({map: texture[4]}),
+	new THREE.MeshBasicMaterial({map: texture[4]}),
+	new THREE.MeshBasicMaterial({map: texture[4]})
   ];
 
   //RedStone
 materials[8] = [
-    new THREE.MeshPhongMaterial({map: texture[5]}),
-	new THREE.MeshPhongMaterial({map: texture[5]}),
-	new THREE.MeshPhongMaterial({map: texture[5]}),
-	new THREE.MeshPhongMaterial({map: texture[5]}),
-	new THREE.MeshPhongMaterial({map: texture[5]}),
-	new THREE.MeshPhongMaterial({map: texture[5]})
+    new THREE.MeshBasicMaterial({map: texture[5]}),
+	new THREE.MeshBasicMaterial({map: texture[5]}),
+	new THREE.MeshBasicMaterial({map: texture[5]}),
+	new THREE.MeshBasicMaterial({map: texture[5]}),
+	new THREE.MeshBasicMaterial({map: texture[5]}),
+	new THREE.MeshBasicMaterial({map: texture[5]})
   ];
 
   //Lapis
 materials[9] = [
-    new THREE.MeshPhongMaterial({map: texture[6]}),
-	new THREE.MeshPhongMaterial({map: texture[6]}),
-	new THREE.MeshPhongMaterial({map: texture[6]}),
-	new THREE.MeshPhongMaterial({map: texture[6]}),
-	new THREE.MeshPhongMaterial({map: texture[6]}),
-	new THREE.MeshPhongMaterial({map: texture[6]})
+    new THREE.MeshBasicMaterial({map: texture[6]}),
+	new THREE.MeshBasicMaterial({map: texture[6]}),
+	new THREE.MeshBasicMaterial({map: texture[6]}),
+	new THREE.MeshBasicMaterial({map: texture[6]}),
+	new THREE.MeshBasicMaterial({map: texture[6]}),
+	new THREE.MeshBasicMaterial({map: texture[6]})
   ];
 
   //Diamond
 materials[10] = [
-    new THREE.MeshPhongMaterial({map: texture[7]}),
-	new THREE.MeshPhongMaterial({map: texture[7]}),
-	new THREE.MeshPhongMaterial({map: texture[7]}),
-	new THREE.MeshPhongMaterial({map: texture[7]}),
-	new THREE.MeshPhongMaterial({map: texture[7]}),
-	new THREE.MeshPhongMaterial({map: texture[7]})
+    new THREE.MeshBasicMaterial({map: texture[7]}),
+	new THREE.MeshBasicMaterial({map: texture[7]}),
+	new THREE.MeshBasicMaterial({map: texture[7]}),
+	new THREE.MeshBasicMaterial({map: texture[7]}),
+	new THREE.MeshBasicMaterial({map: texture[7]}),
+	new THREE.MeshBasicMaterial({map: texture[7]})
   ];
 
   //Emerald
 materials[11] = [
-    new THREE.MeshPhongMaterial({map: texture[8]}),
-	new THREE.MeshPhongMaterial({map: texture[8]}),
-	new THREE.MeshPhongMaterial({map: texture[8]}),
-	new THREE.MeshPhongMaterial({map: texture[8]}),
-	new THREE.MeshPhongMaterial({map: texture[8]}),
-	new THREE.MeshPhongMaterial({map: texture[8]})
+    new THREE.MeshBasicMaterial({map: texture[8]}),
+	new THREE.MeshBasicMaterial({map: texture[8]}),
+	new THREE.MeshBasicMaterial({map: texture[8]}),
+	new THREE.MeshBasicMaterial({map: texture[8]}),
+	new THREE.MeshBasicMaterial({map: texture[8]}),
+	new THREE.MeshBasicMaterial({map: texture[8]})
   ];
 
   //Obsidian
 materials[12] = [
-    new THREE.MeshPhongMaterial({map: texture[9]}),
-	new THREE.MeshPhongMaterial({map: texture[9]}),
-	new THREE.MeshPhongMaterial({map: texture[9]}),
-	new THREE.MeshPhongMaterial({map: texture[9]}),
-	new THREE.MeshPhongMaterial({map: texture[9]}),
-	new THREE.MeshPhongMaterial({map: texture[9]})
+    new THREE.MeshBasicMaterial({map: texture[9]}),
+	new THREE.MeshBasicMaterial({map: texture[9]}),
+	new THREE.MeshBasicMaterial({map: texture[9]}),
+	new THREE.MeshBasicMaterial({map: texture[9]}),
+	new THREE.MeshBasicMaterial({map: texture[9]}),
+	new THREE.MeshBasicMaterial({map: texture[9]})
   ];  
 
   //TNT
 materials[13] = [
-    new THREE.MeshPhongMaterial({map: texture[12]}),//Back
-	new THREE.MeshPhongMaterial({map: texture[12]}),//Front
-	new THREE.MeshPhongMaterial({map: texture[11]}),//Top
-	new THREE.MeshPhongMaterial({map: texture[13]}),//Bottom
-	new THREE.MeshPhongMaterial({map: texture[12]}),//Left
-	new THREE.MeshPhongMaterial({map: texture[12]})//Right
+    new THREE.MeshBasicMaterial({map: texture[12]}),//Back
+	new THREE.MeshBasicMaterial({map: texture[12]}),//Front
+	new THREE.MeshBasicMaterial({map: texture[11]}),//Top
+	new THREE.MeshBasicMaterial({map: texture[13]}),//Bottom
+	new THREE.MeshBasicMaterial({map: texture[12]}),//Left
+	new THREE.MeshBasicMaterial({map: texture[12]})//Right
   ];
 
   //Glass
   materials[14] = [
-    new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Back
-	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Front
-	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Top
-	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Bottom
-	new THREE.MeshLambertMaterial({map: texture[16], transparent: true}),//Left
-	new THREE.MeshLambertMaterial({map: texture[16], transparent: true})//Right
+    new THREE.MeshBasicMaterial({map: texture[16], transparent: true}),//Back
+	new THREE.MeshBasicMaterial({map: texture[16], transparent: true}),//Front
+	new THREE.MeshBasicMaterial({map: texture[16], transparent: true}),//Top
+	new THREE.MeshBasicMaterial({map: texture[16], transparent: true}),//Bottom
+	new THREE.MeshBasicMaterial({map: texture[16], transparent: true}),//Left
+	new THREE.MeshBasicMaterial({map: texture[16], transparent: true})//Right
   ];      
