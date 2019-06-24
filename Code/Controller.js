@@ -36,11 +36,13 @@ class Controller
 			var num = press[i];
 			last.push(num);
 		}
-		
+
 		press = [];
 		keyDown = [];
 		keyUp = [];
 		
+		press.length = 0;
+
 		for (var i = 0; i < keys.length; i++)
 		{  
 			var num = keys[i];
@@ -64,6 +66,8 @@ class Controller
 				keyUp.push(num);
 			}
 		}
+
+		keys.length = 0;
 	}
 	
 	
