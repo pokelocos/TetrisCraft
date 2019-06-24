@@ -28,7 +28,7 @@ class Game
 		this.shape_proyection;
 		this.nextShapes = [];
 		this.hintLimit = 3;
-		this.world = new World(7,7,12);
+		this.world = new World(7,7,12, this.scene);
         
 		this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
 		//var size = 78;
@@ -226,7 +226,7 @@ class Game
 								(this.world.deep - gridSize)/2);
 
 		this.shape_proyection = this.shape.Clone(this.scene);
-		this.shape_proyection.ChangueMaterial(12);
+		this.shape_proyection.ChangueMaterial(materials.length-1);
 
 
 		this.ReorderHints();
@@ -274,7 +274,7 @@ class Game
 			var x = this.shape.cubes[i].position.x + this.shape.position.x;
 			var y = this.shape.cubes[i].position.y + this.shape.position.y;
 			var z = this.shape.cubes[i].position.z + this.shape.position.z;
-			this.world.map[x][z][y] = this.shape.cubes[i];
+			this.world.AddToWorld(x,y,z,this.shape.cubes[i]);
 		}
 	}
 	

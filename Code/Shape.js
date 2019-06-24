@@ -29,7 +29,7 @@ class Shape
 
 		for(var i = 0; i < this.cubes.length; i++)
 		{
-			scene.remove(this.cubes[i].mesh);
+			this.cubes[i].Destroy(scene);
 		}
 	}
 

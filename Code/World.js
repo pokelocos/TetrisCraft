@@ -2,13 +2,13 @@ var gridSize = 1;
 
 class World
 {
-	constructor(width,deep,heigth)
+	constructor(width,deep,heigth, scene)
 	{
 		this.width = width;
 		this.deep = deep;
 		this.heigth = heigth;
 		this.map = [];	
-		
+		this.scene = scene;
 		this.rotation = 0.0;
 		
 		for(var i=0; i<this.width; i++) 
@@ -36,7 +36,7 @@ class World
 				{
 					if(this.map[i][j][k] != undefined)
 					{
-						//map[i][j][k].Update();
+						//this.map[i][j][k].Update();
 					}					
 				}
 			}
@@ -59,7 +59,26 @@ class World
 			}
 		}
 	}
+
+	AddToWorld(x,y,z,cube){
+		cube.position.set(x,y,z);
+		this.map[x][z][y] = cube;
+		cube.Start(this);
+	}
 	
+	RemoveFromWorld(x,y,z){
+		if(x >= 0 && y >= 0 && z >= 0)
+		{
+			if(x < this.width && z < this.deep && y < this.height)
+			{
+				if(this.map[x][z][y] != undefined){
+					console.log("destroing");
+					this.map[x][z][y].Destroy(this.scene);
+				}
+			}
+		}
+	}
+
 	CheckLineX(y,z)
 	{
 		for(var i=0; i<this.width; i++) 

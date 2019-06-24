@@ -5,11 +5,11 @@ class Cube
         this.position = new THREE.Vector3(x,y,z);
         var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
         this.mesh = new THREE.Mesh(geometry,materials[id]);
-
+		this.id = id;
 		this.mesh.castShadow = true; 
 		this.mesh.receiveShadow = true;
         
-		this.Update(this.mesh);
+		//this.Update(this.mesh);
     }
 
 	SetMaterial(id){
@@ -25,14 +25,21 @@ class Cube
         );
     }
 
-    Update()
-    {
-		this.mesh.position.set(
-				this.position.x * gridSize,
-				this.position.y * gridSize + gridSize/2,
-				this.position.z * gridSize,
-			);
-    }
+	Start(world){
+		if(this.id == 11){
+			for(var y = -1; y < 2; y++){
+				for(var x = -1; x < 2; x++){
+					for(var z = -1; z < 2; z++){
+						world.RemoveFromWorld(this.position.x + x, this.position.y + y, this.position.z+z);
+					}
+				}
+			}
+		}
+	}
+
+	Destroy(scene){
+		scene.remove(this.mesh);
+	}
 
     Translate(x,y,z)
     {
