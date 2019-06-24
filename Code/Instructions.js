@@ -96,17 +96,17 @@ class Instructions
 		this.titleTextMesh.position.set(-300,430,2);
 		this.sceneHUD.add(this.titleTextMesh);
 
-		this.titleTextMesh = this.InitText("Nicolas Romero",0,140,260,140,40);
-		this.titleTextMesh.position.set(-350,300,2);
+		this.titleTextMesh = this.InitText("Nicolas Romero",0,140,300,150,34);
+		this.titleTextMesh.position.set(-330,300,3);
 		this.sceneHUD.add(this.titleTextMesh);
-		this.titleTextMesh = this.InitText("Santiago Cervera",0,140,260,140,40);
-		this.titleTextMesh.position.set(-350,200,2);
+		this.titleTextMesh = this.InitText("Santiago Cervera",0,140,300,150,34);
+		this.titleTextMesh.position.set(-350,200,3);
 		this.sceneHUD.add(this.titleTextMesh);
-		this.titleTextMesh = this.InitText("Gabriel Sepulveda",0,140,260,150,40);
-		this.titleTextMesh.position.set(-350,100,2);
+		this.titleTextMesh = this.InitText("Gabriel Sepulveda",0,140,300,150,34);
+		this.titleTextMesh.position.set(-350,100,3);
 		this.sceneHUD.add(this.titleTextMesh);
-		this.titleTextMesh = this.InitText("Cristobal Venegas",0,140,260,150,40);
-		this.titleTextMesh.position.set(-350,0,2);
+		this.titleTextMesh = this.InitText("Cristobal Venegas",0,140,300,150,34);
+		this.titleTextMesh.position.set(-350,0,3);
 		this.sceneHUD.add(this.titleTextMesh);
 
 		//------- Texts
