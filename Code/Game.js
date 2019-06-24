@@ -91,14 +91,14 @@ class Game
 	
 	Start()
 	{
-		this.GenerateNewHints(-10,-10,-10,1);
+		this.GenerateNewHints(0,(-window.innerHeight/2  + 10)/30,0,20);
 		this.SpawnShape();
 	}
 
     Update()
     {	
 		if(this.gameOver){console.log("game over");return;}
-		//this.world.Update();
+		this.world.Update();
 		this.shape.Update();
 		this.shape_proyection.Update();
 		
@@ -201,6 +201,26 @@ class Game
 		} 
 		
 		this.time++;
+		
+		var points = 0;
+		var multiplier = 0;
+		for(var i = 0; i < this.world.heigth; i++)
+		{
+			if(this.world.CheckLayer(i))
+			{
+				multiplier++;
+				for(var j=0; j<this.width; j++) 
+				{
+					for(var k=0; k<this.deep; k++) 
+					{
+						points += this.world.map[i][k][i].score;
+						this.scene.remove(this.world.map[i][k][i]);
+						this.world.map[j][k][i].Destroy(this.scene);
+					}
+				}
+			}
+		}
+		this.UpdateScoreText(points*multiplier);
     }
 
     Draw(buffer)
@@ -230,7 +250,8 @@ class Game
 
 
 		this.ReorderHints();
-		this.GenerateNewHints(0,0,0,1);
+		this.GenerateNewHints(0,(-window.innerHeight/2  + 10)/10,0,20);
+		console.log(this.shape.cubes[0].id);
 	}
 	
 	CheckShapeCollision(dx,dy,dz, shap)
@@ -284,8 +305,10 @@ class Game
 		{
 			if(this.nextShapes[i] == null)
 			{
+				var j = Math.floor(Math.random()*shapes.length);
+				if(j < 0) j = 0;
 				this.nextShapes[i] = new Shape(x + i*delta,y,z,
-									shapes[Math.floor(Math.random()*shapes.length)],
+									shapes[j],
 									this.sceneHUD);
 			}	
 		}

@@ -36,7 +36,7 @@ class World
 				{
 					if(this.map[i][j][k] != undefined)
 					{
-						//this.map[i][j][k].Update();
+						this.map[i][j][k].Update(this);
 					}					
 				}
 			}
@@ -107,7 +107,7 @@ class World
 		{
 			for(var j=0; j<this.deep; j++) 
 			{
-				if(this.map[i][j][z] != undefined)
+				if(this.map[i][j][z] == undefined)
 				{
 					return false;
 				}

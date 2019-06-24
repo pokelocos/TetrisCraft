@@ -5,7 +5,8 @@ class Cube
         this.position = new THREE.Vector3(x,y,z);
         var geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
         this.mesh = new THREE.Mesh(geometry,materials[id]);
-		this.id = id;
+        this.id = id;
+        this.score = (id+1)*10;
 		this.mesh.castShadow = true; 
 		this.mesh.receiveShadow = true;
         
@@ -26,19 +27,58 @@ class Cube
     }
 
 	Start(world){
-		if(this.id == 11){
-			for(var y = -1; y < 2; y++){
-				for(var x = -1; x < 2; x++){
-					for(var z = -1; z < 2; z++){
-						world.RemoveFromWorld(this.position.x + x, this.position.y + y, this.position.z+z);
-					}
-				}
-			}
+        switch(this.id)
+		{
+            case 13:
+                for(var y = -1; y < 2; y++)
+                {
+                    for(var x = -1; x < 2; x++)
+                    {
+                        for(var z = -1; z < 2; z++)
+                        {
+                            world.RemoveFromWorld(this.position.x + x, this.position.y + y, this.position.z+z);
+                        }
+                    }
+                }
+            break;
+            default: break;
 		}
-	}
+    }
+    
+    Update(world)
+    {
+        switch(this.id)
+        {
+            case 1: 
+                if(this.position.y > 0)
+                {
+                    if(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    {
+                        this.position.y -= 1;
+                    }
+                }
+            break;
+            case 2:
+                if(this.position.y > 0)
+                {
+                    if(world.map[this.position.x][this.position.z][this.position.y-1] == undefined)
+                    {
+                        this.position.y -= 1;
+                    }
+                }
+            break;
+            default: break;
+        }
+        this.mesh.position.set(
+            this.position.x * gridSize + gridSize/2,
+            this.position.y * gridSize + gridSize/2,
+            this.position.z * gridSize + gridSize/2,
+        );
+    }
 
 	Destroy(scene){
-		scene.remove(this.mesh);
+        scene.remove(this.mesh);
+        delete(this);
 	}
 
     Translate(x,y,z)
