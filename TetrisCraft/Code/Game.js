@@ -31,27 +31,13 @@ class Game
 		this.world = new World(7,7,12, this.scene);
         
 		this.camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 50);
-		//var size = 78;
-		//this.camera = new THREE.OrthographicCamera(window.innerWidth/size, -window.innerWidth/size, window.innerHeight/size, -window.innerHeight/size, 1, 100);
 
 		this.camera.position.set(-7,18,-7);
 		this.camera.lookAt(3.5,6,3.5);
 
-
 		var gridHelper = new THREE.GridHelper( 7, 7 );
 		gridHelper.position.set(3.5,0,3.5);
 		this.scene.add( gridHelper );
-		/*
-		for(var y = 0; y < 7 ; y++){
-			for(var x = -3; x < 4; x++){
-				for(var z = -3; z < 4; z++){
-					if(Math.random() > 0.7){
-						var cube = new Cube(x,y,z, Math.floor(Math.random() * 11) + 1);
-						this.scene.add(cube.mesh);
-					}
-				}
-			}
-		}*/
 
 		/*
 		var light = new THREE.PointLight( 0xddffdd, 0.4 );
@@ -99,18 +85,25 @@ class Game
 	Start()
 	{
 		this.GenerateNewHints(0,(-window.innerHeight/2  + 10)/30,0,20);
+		console.log('Start');
 		this.SpawnShape();
 	}
 
     Update()
     {	
-		if(this.gameOver){console.log("game over");return;}
+		if(this.gameOver)
+		{
+			console.log("game over");
+			return;
+		}
+
 		this.world.Update();
 		this.shape.Update();
 		this.shape_proyection.Update();
 		
 		this.shape_proyection.SetPos(this.shape.position.x,this.shape.position.y,this.shape.position.z);
 
+		// esto hace bajar la preview del bloque actual hasta donde deveria chocar
 		while(!this.CheckShapeCollision(0,-1,0, this.shape_proyection)){
 			this.shape_proyection.Translate(0,-1,0);
 		}
@@ -137,9 +130,22 @@ class Game
 					// perdiste
 				}
 			}
+
+			this.multiplier = 0;
+			this.points = 0;
+			for(var i=0; i<this.world.heigth; i++) 
+			{
+				if(this.world.CheckLayer(i))
+				{
+					this.multiplier++;
+					this.points += this.world.RemoveLayer(i);
+				}
+			}
+			this.UpdateScoreText(this.points*this.multiplier);
 		}
 		
-		
+		this.time++;
+
 		//up
 		if(keyDown.includes(38))
 		{
@@ -206,30 +212,19 @@ class Game
 				this.shape.Rotate(new THREE.Vector3(0,0,3));
 			}
 		} 
-		
-		this.time++;
-		
-		this.multiplier = 0;
-		this.points = 0;
-		for(var i=0; i<this.world.heigth; i++) 
-		{
-			if(this.world.CheckLayer(i))
-			{
-				this.multiplier++;
-				this.points += this.world.RemoveLayer(i);
-			}
-		}
-		this.UpdateScoreText(this.points*this.multiplier);
     }
 
+	
     Draw(buffer)
     {
+		console.log('Game.Draw('+buffer+')');
         buffer.render(this.scene,this.camera);
 		buffer.render(this.sceneHUD,this.cameraHUD);
     }
 
     SpawnShape()
     {
+		console.log('Spawn Shape');
 		if(this.shape_proyection != null)
 			this.shape_proyection.Destroy(this.scene);
 
@@ -245,7 +240,7 @@ class Game
 								(this.world.deep - gridSize)/2);
 
 		this.shape_proyection = this.shape.Clone(this.scene);
-		this.shape_proyection.ChangueMaterial(materials.length-1);
+		this.shape_proyection.ChangeMaterial(materials.length-1);
 
 
 		this.ReorderHints();

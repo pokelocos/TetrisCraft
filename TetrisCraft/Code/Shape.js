@@ -18,7 +18,7 @@ class Shape
         }
     }
 
-	ChangueMaterial(materialID)
+	ChangeMaterial(materialID)
 	{
 		for(var i = 0; i < this.cubes.length; i++)
         {

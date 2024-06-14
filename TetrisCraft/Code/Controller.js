@@ -77,7 +77,4 @@ class Controller
 
 		keys.length = 0;
 	}
-	
-	
-
 }
