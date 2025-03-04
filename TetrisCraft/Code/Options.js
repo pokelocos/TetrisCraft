@@ -9,7 +9,7 @@ class Options
 		this.cameraHUD.lookAt(0,0,0);
 		
 		this.loader = new THREE.TextureLoader();
-		this.texture = this.loader.load('../Assets/BackGround.png');
+		this.texture = this.loader.load('Assets/BackGround.png');
 		this.texture.magFilter = THREE.NearestFilter;
 		this.texture.minFilter = THREE.NearestFilter;
 		this.texture.wrapS = THREE.RepeatWrapping;
@@ -21,36 +21,36 @@ class Options
 		this.background.material.side = THREE.DoubleSide;
 		this.sceneHUD.add(this.background);
 		
-		this.pacefulTexture = this.loader.load('../Assets/peacefulButton.png');
+		this.pacefulTexture = this.loader.load('Assets/peacefulButton.png');
 		this.pacefulTexture.magFilter = THREE.NearestFilter;
 		this.pacefulTexture.minFilter = THREE.NearestFilter;	
-		this.easyTexture = this.loader.load('../Assets/easyButton.png');
+		this.easyTexture = this.loader.load('Assets/easyButton.png');
 		this.easyTexture.magFilter = THREE.NearestFilter;
 		this.easyTexture.minFilter = THREE.NearestFilter;	
-		this.normalTexture = this.loader.load('../Assets/normalButton.png');
+		this.normalTexture = this.loader.load('Assets/normalButton.png');
 		this.normalTexture.magFilter = THREE.NearestFilter;
 		this.normalTexture.minFilter = THREE.NearestFilter;	
-		this.hardTexture = this.loader.load('../Assets/hardButton.png');
+		this.hardTexture = this.loader.load('Assets/hardButton.png');
 		this.hardTexture.magFilter = THREE.NearestFilter;
 		this.hardTexture.minFilter = THREE.NearestFilter;	
 		
-		this.dificultButton = new Item2D('../Assets/normalButton.png',400,60);
+		this.dificultButton = new Item2D('Assets/normalButton.png',400,60);
 		this.dificultButton.setPosition(0,70,0);
 		this.sceneHUD.add(this.dificultButton.mesh);
 		
-		this.exitButton = new Item2D('../Assets/BackButton.png',400,60);
+		this.exitButton = new Item2D('Assets/BackButton.png',400,60);
 		this.exitButton.setPosition(0,0,0);
 		this.sceneHUD.add(this.exitButton.mesh);
 		
-		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
+		this.selector = new Item2D('Assets/selector.png',400,60* 1.15);
 		this.selector.setPosition(0,-70,0);
 		this.sceneHUD.add(this.selector.mesh);
 		
 		this.selected = 0;
 		this.posY = 70;
 		
-		this.clickSound = new Audio('../Sounds/click.mp3');
-		this.selectSound = new Audio('../Sounds/harp.mp3');	
+		this.clickSound = new Audio('Sounds/click.mp3');
+		this.selectSound = new Audio('Sounds/harp.mp3');	
 
 		this.OptionsTitle = this.InitText("Options",0,100,260,140,80);
 		this.OptionsTitle.position.set(10,300,2);

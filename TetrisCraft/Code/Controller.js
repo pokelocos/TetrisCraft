@@ -7,12 +7,20 @@ var last = [];
 
 document.addEventListener('keydown', function(event) 
 {
+	if ([37, 38, 39, 40].includes(event.keyCode)) {
+        event.preventDefault();
+    }
+	
 	keys.push(event.keyCode);
 });
 
 
 document.addEventListener('keyup', function(event) 
 {
+	if ([37, 38, 39, 40].includes(event.keyCode)) {
+        event.preventDefault();
+    }
+
 	for(var i = 0; i < keys.length; i++)
 	{
 		if(event.keyCode == keys[i])
@@ -69,7 +77,4 @@ class Controller
 
 		keys.length = 0;
 	}
-	
-	
-
 }

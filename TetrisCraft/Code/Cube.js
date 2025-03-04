@@ -4,7 +4,7 @@ class Cube
     {
         this.position = new THREE.Vector3(x,y,z);
         this.geometry = new THREE.BoxGeometry(gridSize,gridSize,gridSize);
-        this.mesh = new THREE.Mesh(geometry,materials[id]);
+        this.mesh = new THREE.Mesh(this.geometry, materials[id]);
         this.id = id;
         this.score = (id+1)*10;
 		this.mesh.castShadow = true; 
@@ -99,12 +99,33 @@ class Cube
         );
     }
 
+    /*
 	Destroy(scene){
         this.geometry.dispose();
         scene.remove(this.mesh);
         this.mesh.dispose();
         delete(this);
 	}
+        */
+
+    Destroy(scene) {
+        // Elimina la geometría y el material asociados al mesh
+        if (this.mesh.geometry) {
+            this.mesh.geometry.dispose();
+        }
+        if (this.mesh.material) {
+            // Si hay varios materiales, dispóselos todos
+            if (Array.isArray(this.mesh.material)) {
+                this.mesh.material.forEach(material => material.dispose());
+            } else {
+                this.mesh.material.dispose();
+            }
+        }
+        // Elimina el mesh de la escena
+        scene.remove(this.mesh);
+        this.mesh = null; // Opcional, ayuda a evitar usos futuros de un objeto eliminado
+        delete(this);
+    }
 
     Translate(x,y,z)
     {

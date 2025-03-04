@@ -13,7 +13,7 @@ class MainMenu
 		this.cameraHUD.lookAt(0,0,0);
 		
 		this.loader = new THREE.TextureLoader();
-		this.texture = this.loader.load('../Assets/BackGround_2.png');
+		this.texture = this.loader.load('Assets/BackGround_2.png');
 		this.texture.magFilter = THREE.NearestFilter;
 		this.texture.minFilter = THREE.NearestFilter;
 		this.material = new THREE.MeshBasicMaterial({map: this.texture,transparent: true});
@@ -25,31 +25,31 @@ class MainMenu
 		this.background.material.side = THREE.DoubleSide;
 		this.sceneHUD.add(this.background);
 		
-		this.title = new Item2D('../Assets/TetrisCraft_title.png',787,89);
+		this.title = new Item2D('Assets/TetrisCraft_title.png',787,89);
 		this.title.setPosition(0,(window.innerHeight/2) -150,0);
 		this.sceneHUD.add(this.title.mesh);	
 		
-		this.playButton = new Item2D('../Assets/playButton.png',400,60);
+		this.playButton = new Item2D('Assets/playButton.png',400,60);
 		this.playButton.setPosition(0,70,0);
 		this.sceneHUD.add(this.playButton.mesh);
 		
-		this.optionButton = new Item2D('../Assets/optionsButton.png',400,60);
+		this.optionButton = new Item2D('Assets/optionsButton.png',400,60);
 		this.sceneHUD.add(this.optionButton.mesh);
 		
-		this.InstructButton = new Item2D('../Assets/instructionsButton.png',400,60);
+		this.InstructButton = new Item2D('Assets/instructionsButton.png',400,60);
 		this.InstructButton.setPosition(0,-70,0);
 		this.sceneHUD.add(this.InstructButton.mesh);	
 		
-		this.exitButton = new Item2D('../Assets/ExitButton.png',400,60);
+		this.exitButton = new Item2D('Assets/ExitButton.png',400,60);
 		this.exitButton.setPosition(0,-140,0);
 		this.sceneHUD.add(this.exitButton.mesh);
 		
-		this.selector = new Item2D('../Assets/selector.png',400,60* 1.15);
+		this.selector = new Item2D('Assets/selector.png',400,60* 1.15);
 		this.selector.setPosition(0,posY,0);
 		this.sceneHUD.add(this.selector.mesh);
 		
-		this.clickSound = new Audio('../Sounds/click.mp3');
-		this.selectSound = new Audio('../Sounds/harp.mp3');	
+		this.clickSound = new Audio('Sounds/click.mp3');
+		this.selectSound = new Audio('Sounds/harp.mp3');	
 	}
 	
 	Update()

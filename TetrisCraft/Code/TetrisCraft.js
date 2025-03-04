@@ -12,31 +12,41 @@ window.mozRequestAnimationFrame || function (callback)
 //Scenes
 var game,main,instructions,options; // esto se puede cambiar a lista
 
-init();
-loop();
+//init();
+//loop();
 
-function init() 
+function init(canvas,scale)
 {
-	this.mySound = new Audio('../Sounds/MinecraftMusicfullPlaylist.mp3');
+	this.mySound = new Audio('Sounds/MinecraftMusicfullPlaylist.mp3');
 	this.mySound.play();
 	
 	main = new MainMenu();
 	instructions = new Instructions();
-	options = new Options();	
-	this.controller = new Controller();
-	this.renderer = new THREE.WebGLRenderer({antialias:true, alpha: true});
-	this.renderer.autoClear = false;
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-	this.renderer.shadowMap.enabled = true;
-	this.renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
-	document.body.appendChild(this.renderer.domElement);
+	options = new Options();
+	controller = new Controller();
+	//this.renderer = new THREE.WebGLRenderer({antialias:true, alpha: true});
+	renderer = new THREE.WebGLRenderer({ 
+		canvas: canvas, antialias: true, alpha: true 
+	});
+	renderer.autoClear = false;
+    //this.renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.setSize(canvas.width, canvas.height);
+	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.type = THREE.PCFSoftShadowMap; 
+	//document.body.appendChild(this.renderer.domElement);
 
-	game = new Game(renderer);
+	game = new Game(this.renderer);
+	//game = new Game(renderer);
 }
 
 function loop() 
 {
-	requestAnimationFrame(loop);	
+	if(!controller || !main)
+	{
+		return;
+	}
+
+	requestAnimationFrame(loop);
 	controller.Update();
 	//this.renderer.clear();
 	switch(state)

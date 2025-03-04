@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Tetris Craft</title>
+		<style>
+			body {
+                margin: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                overflow: hidden; /* Esto es opcional, dependiendo de tu diseño */
+                background-color: #f0f0f0; /* Color de fondo opcional */
+            }
+			#gameCanvas {
+                display: block;
+                border: 1px solid #ff0000; /* Borde opcional para el canvas */
+                /*transform: scale(0.3);*/
+            }
+            @font-face{
+                font-family: 'MinecraftFont';
+                src: url('Assets/Minecraft.ttf') format('truetype');
+            }
+		</style>
+	</head>
+
+    <body>
+        <canvas id="gameCanvas"></canvas> <!--???-->
+
+        <script src="lib/three.js"></script>
+        <script src="lib/webgl-utils.js"></script>
+        <script src="lib/webgl-debug.js"></script>
+        <script src="lib/cuon-utils.js"></script>
+        <script src="lib/cuon-matrix.js"></script>
+
+        <!--SAO-->
+        <script src="SAO/postprocessing/EffectComposer.js"></script>
+        <script src="SAO/postprocessing/RenderPass.js"></script>
+        <script src="SAO/postprocessing/ShaderPass.js"></script>
+        <script src="SAO/postprocessing/SAOPass.js"></script>
+
+        <script src="SAO/shaders/CopyShader.js"></script>
+        <script src="SAO/shaders/SAOShader.js"></script>
+        <script src="SAO/shaders/DepthLimitedBlurShader.js"></script>
+        <script src="SAO/shaders/UnpackDepthRGBAShader.js"></script>
+		
+		<script src="Code/Controller.js"></script>
+		<script src="Code/Item2D.js"></script>
+        <script src="Code/Options.js"></script>
+        <script src="Code/Instructions.js"></script>
+        <script src="Code/MainMenu.js"></script>
+        <script src="Code/World.js"></script>
+        <script src="Code/Game.js"></script>
+        <script src="Code/Shape.js"></script>
+        <script src="Code/Cube.js"></script>
+        <script src="Code/MaterialsDatabase.js"></script>
+        <script src="Code/TetrisShapes.js"></script>
+        <script src="Code/TetrisCraft.js"></script>
+
+        <script>
+            // Asegúrate de que hay un punto de entrada en tu aplicación
+            window.onload = function() {
+                const canvas = document.getElementById('gameCanvas');
+                const parentElement = canvas.parentElement;
+                const width = parentElement.clientWidth || window.innerWidth;
+                const height = parentElement.clientHeight || window.innerHeight;
+
+                // Establece el tamaño del canvas dinámicamente
+                canvas.width = width;
+                canvas.height = height;
+                const scale = 1;//0.5;//width/canvas.width;
+                init(canvas,scale);
+                loop();
+            };
+        </script>
+    </body>
+</html>
